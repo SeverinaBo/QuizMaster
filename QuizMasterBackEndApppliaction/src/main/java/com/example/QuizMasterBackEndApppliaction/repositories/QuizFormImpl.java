@@ -10,7 +10,7 @@ import java.util.List;
 public class QuizFormImpl {
     private final JdbcTemplate jdbcTemplate;
     public List<QuizForm> getAllQuestions() {
-        String sql = "SELECT * FROM QUIZFORM";
+        String sql = "SELECT * FROM QUIZ_FORM";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(QuizForm.class));
     }
 }

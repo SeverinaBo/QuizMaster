@@ -3,11 +3,11 @@ import { createSlice, configureStore } from "@reduxjs/toolkit";
 const createState = (quizez) => {
     return { quizez: quizez };
 };
-const initState = createState([]);
+const initialState = createState([]);
 
 const quizezSlice = createSlice({
     name: "quizez",
-    initialState: initState,
+    initialState: initialState,
     reducers: {
         addQuestion(state, action) {
             const currentQuestions = [...state.quizez];

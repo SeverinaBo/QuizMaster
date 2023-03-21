@@ -1,7 +1,7 @@
 
 // @mui
 import {Container, Stack, Typography} from '@mui/material';
-import ResponsiveAppBar from "../layouts/dashboard/header/ResponsiveAppBar";
+
 
 import QuizList from "../Quizzez/QuizList";
 import quizzez from "../_mock/quizzez";
@@ -16,10 +16,6 @@ export default function QuizListPage() {
 
     return (
         <>
-
-
-
-            <ResponsiveAppBar/>
 
             <Container>
                 <Typography variant="h4" sx={{mb: 5}}>

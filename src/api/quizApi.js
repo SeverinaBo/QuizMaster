@@ -1,4 +1,4 @@
-import HTTP from "./apiIndex"
+import HTTP from "./index"
 import {useMutation, useQuery} from "react-query";
 
 // http://localhost:8080/quiz/all

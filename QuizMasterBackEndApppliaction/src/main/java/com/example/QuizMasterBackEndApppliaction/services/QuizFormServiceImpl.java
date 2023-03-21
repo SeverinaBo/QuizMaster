@@ -7,10 +7,6 @@ import com.example.QuizMasterBackEndApppliaction.repositories.QuizFormRepo;
 
 
 import lombok.RequiredArgsConstructor;
-
-import java.util.ArrayList;
-
-
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -32,21 +28,21 @@ public class QuizFormServiceImpl implements QuizFormService {
     }
 
     @Override
-    public String createQuestion(QuizFormDto quizFormDto) {
-        QuizForm newQuestion = createNewQuestions(quizFormDto);
+    public String createQuizForm(QuizFormDto quizFormDto) {
+        QuizForm newQuestion = createNewQuestion(quizFormDto);
         quizFormRepo.save(newQuestion);
         return newQuestion.getId() != null ? "success" : "failed";
     }
 
 
-    private QuizForm createNewQuestions(QuizFormDto quizFormDto) {
+    private QuizForm createNewQuestion(QuizFormDto quizFormDto) {
         return QuizForm.builder()
                 .id(quizFormDto.getId())
                 .question(quizFormDto.getQuestion())
-                .answerA(quizFormDto.getAnswerA())
-                .answerB(quizFormDto.getAnswerB())
-                .answerC(quizFormDto.getAnswerC())
-                .answerD(quizFormDto.getAnswerD())
+                .optionA(quizFormDto.getOptionA())
+                .optionB(quizFormDto.getOptionB())
+                .optionC(quizFormDto.getOptionC())
+                .optionD(quizFormDto.getOptionD())
                 .correctAnswer(quizFormDto.getCorrectAnswer())
                 .timePerQuestion(quizFormDto.getTimePerQuestion())
                 .build();
@@ -58,10 +54,10 @@ public class QuizFormServiceImpl implements QuizFormService {
                 .map(o -> QuizFormDto.builder()
                         .id(o.getId())
                         .question(o.getQuestion())
-                        .answerA(o.getAnswerA())
-                        .answerB(o.getAnswerB())
-                        .answerC(o.getAnswerC())
-                        .answerD(o.getAnswerD())
+                        .optionA(o.getOptionA())
+                        .optionB(o.getOptionB())
+                        .optionC(o.getOptionC())
+                        .optionD(o.getOptionD())
                         .correctAnswer(o.getCorrectAnswer())
                         .timePerQuestion(o.getTimePerQuestion())
                         .build())

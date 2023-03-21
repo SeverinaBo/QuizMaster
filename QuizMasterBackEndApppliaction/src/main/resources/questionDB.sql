@@ -1,6 +1,6 @@
 
 
-INSERT INTO QUIZFORM (  QUESTION, ANSWERA, ANSWERB, ANSWERC, ANSWERD, CORRECTANSWER, TIMEPERQUESTION)
+INSERT INTO QUIZ_FORM (  QUESTION, OPTION_A, OPTION_B, OPTION_C, OPTION_D, CORRECT_ANSWER, TIME_PER_QUESTION)
 VALUES (  'Which of the following keywords is used to define a variable in Javascript?',
            'stringify()',
            'parse()',

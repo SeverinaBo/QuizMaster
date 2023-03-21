@@ -9,12 +9,16 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 
-import AdbIcon from '@mui/icons-material/Adb';
+
 
 import {Link} from 'react-router-dom';
 import LanguagePopover from "./LanguagePopover";
 import AccountPopover from "./AccountPopover";
 import HeaderNavigation from "./HeaderNavigation";
+
+import Pages from "../../../pages/Pages";
+import AppFooter from "../footer/AppFooter";
+
 
 
 function ResponsiveAppBar() {
@@ -27,6 +31,7 @@ function ResponsiveAppBar() {
 
 
     return (
+        <>
         <AppBar position="static">
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
@@ -50,7 +55,7 @@ function ResponsiveAppBar() {
                         </IconButton>
 
                     </Box>
-                    <AdbIcon sx={{display: {xs: 'flex', md: 'none'}, mr: 1}}/>
+
                     <Typography
                         variant="h5"
                         noWrap
@@ -67,12 +72,20 @@ function ResponsiveAppBar() {
                             textDecoration: 'none',
                         }}
                     />
+
                     <HeaderNavigation/>
                     <LanguagePopover/>
                     <AccountPopover/>
+
+
                 </Toolbar>
             </Container>
         </AppBar>
+
+                            <Pages />
+                {/*<AppFooter sx={{pt: 4}}/>*/}
+
+            </>
     );
 }
 

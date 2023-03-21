@@ -2,7 +2,7 @@ import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Button, Grid } from '@mui/material';
-import ResponsiveAppBar from '../layouts/dashboard/header/ResponsiveAppBar';
+
 import {Field, Formik} from 'formik';
 
 const validationSchema = Yup.object().shape({
@@ -26,7 +26,7 @@ export default function JoinGame() {
 
     return (
         <div>
-            <ResponsiveAppBar />
+
             <Grid
                 component="form"
                 sx={{

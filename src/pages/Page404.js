@@ -1,4 +1,4 @@
-import {Helmet} from 'react-helmet-async';
+
 import {Link as RouterLink} from 'react-router-dom';
 // @mui
 import {styled} from '@mui/material/styles';
@@ -22,7 +22,7 @@ export default function Page404() {
     return (
         <>
 
-            <title> 404 Page Not Found | Quizmaster </title>
+
 
 
             <Container>

@@ -22,7 +22,7 @@ function CreateOrJoin() {
             <StyledSection>
                 <Button margin='20' type="submit" variant="contained"
                         onClick={() => {
-                            navigate('/create', {replace: true})
+                            navigate('/createIntro', {replace: true})
                         }}>
                     Create a game
                 </Button>

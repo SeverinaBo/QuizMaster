@@ -4,20 +4,38 @@ import * as React from "react";
 import {Button, LinearProgress, IconButton, Table, TableBody, TableCell, TableHead, TableRow} from "@mui/material";
 
 
-import EditIcon from "@mui/icons-material/Edit";
-import QuizForm from "./QuizForm";
+import AddIcon from '@mui/icons-material/Add';
+import EditIcon from '@mui/icons-material/Edit';
+
 import { useState } from "react";
 import {useNavigate} from "react-router-dom";
 import {useQuiz} from "../api/quizApi";
-import ResponsiveAppBar from "../layouts/dashboard/header/ResponsiveAppBar";
-import AddQuestion from "../Quizzez/AddQuestion";
+
+import {reduxActions} from "../reactReduxActions/reduxActions";
+import {styled} from "@mui/material/styles";
+import CreateQuizForm from "../Quizzez/CreateQuizForm";
+import {useDispatch} from "react-redux";
 
 
+
+export const StyledContent = styled('div')(({theme}) => ({
+    margin: 'auto',
+    minHeight: '50vh',
+    display: 'flex',
+    position:'center',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    padding: theme.spacing(12, 0),
+}));
 
 const QuizQuestionsList = () => {
 
-    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const addQuestion = (question) => {
+        dispatch(reduxActions.addQuestion(question));
+    };
 
+    const navigate = useNavigate();
     const { isFetching, quizez = [], refetch } = useQuiz();
     const [openQuestionModal, setOpenQuestionModal] = useState(false);
     const [editQuestion, setEditQuestion] = useState(null);
@@ -41,31 +59,35 @@ const QuizQuestionsList = () => {
 
 const quizListElements = quizez.map((questionList, i) => (
     <TableRow key={i}>
-        <TableCell>{questionList.createdBy}</TableCell>
-        <TableCell>{questionList.quizTitle}</TableCell>
+        {/*<TableCell>{questionList.createdBy}</TableCell>
+        <TableCell>{questionList.quizTitle}</TableCell>*/}
         <TableCell>{questionList.question}</TableCell>
-        <TableCell>{questionList.answerA}</TableCell>
-        <TableCell>{questionList.answerB}</TableCell>
-        <TableCell>{questionList.answerC}</TableCell>
-        <TableCell>{questionList.answerD}</TableCell>
+        <TableCell>{questionList.optionA}</TableCell>
+        <TableCell>{questionList.optionB}</TableCell>
+        <TableCell>{questionList.optionC}</TableCell>
+        <TableCell>{questionList.optionD}</TableCell>
         <TableCell>{questionList.correctAnswer}</TableCell>
         <TableCell>{questionList.timePerQuestion}</TableCell>
         <TableCell>
                     <Button variant="contained" onClick={() => navigate(`/quizez/${questionList.id}`)}>
                      Click
                     </Button>
-
-         {/*   <IconButton
+            <IconButton
                 onClick={() =>
-                    addProduct({
+                    addQuestion({
                         id: questionList.id,
                         question: questionList.question,
-                        price: questionList.price,
+                        optionA: questionList.optionA,
+                        optionB: questionList.optionB,
+                        optionC: questionList.optionC,
+                        optionD: questionList.optionD,
+                        correctAnswer: questionList.correctAnswer,
+                        timePerQuestion: questionList.timePerQuestion,
                     })
                 }
             >
-                <AddShoppingCartIcon />
-            </IconButton> */}
+                <AddIcon />
+            </IconButton>
 
             <IconButton
                 onClick={() => {
@@ -75,21 +97,19 @@ const quizListElements = quizez.map((questionList, i) => (
             >
                 <EditIcon />
             </IconButton>
+
         </TableCell>
     </TableRow>
 
 ));
 
 return (
-
             <>
-
-                <ResponsiveAppBar/>
-                <Table >
+                <Table size="small" >
                     <TableHead>
                         <TableRow>
-                            <TableCell>Created By</TableCell>
-                            <TableCell>Quiz Title</TableCell>
+              {/*              <TableCell>Created By</TableCell>
+                            <TableCell>Quiz Title</TableCell>*/}
                             <TableCell>Question</TableCell>
                             <TableCell>Answer A</TableCell>
                             <TableCell>Answer B</TableCell>
@@ -97,14 +117,26 @@ return (
                             <TableCell>Answer D</TableCell>
                             <TableCell>Correct Answer</TableCell>
                             <TableCell>Time for question</TableCell>
-                            <TableCell>Edit/Remove</TableCell>
+                          {/*  <TableCell>Edit/Remove</TableCell>*/}
+                            <TableCell></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>{loadingElement || noQuestionsElement || quizListElements}</TableBody>
                 </Table>
-                <AddQuestion />
-                <QuizForm fetchQuestions={refetch} open={openQuestionModal} onClose={() => setOpenQuestionModal(false)} quiz={editQuestion} />
 
+                        {/*<AddQuestion/>*/}
+                    <CreateQuizForm fetchQuestions={refetch} open={openQuestionModal} onClose={() => setOpenQuestionModal(true)} quiz={editQuestion} />
+                    <div style={{ marginTop: "10px", textAlign: "center" }}>
+                        <Button
+                            variant="outlined"
+                            onClick={() => {
+                                setOpenQuestionModal(true);
+                                setEditQuestion(null);
+                            }}
+                        >
+                            Add new question
+                        </Button>
+                    </div>
 
                     <Button
                         style={{
@@ -120,8 +152,6 @@ return (
                     >
                         Finish Quiz
                     </Button>
-
-
             </>
 
 )

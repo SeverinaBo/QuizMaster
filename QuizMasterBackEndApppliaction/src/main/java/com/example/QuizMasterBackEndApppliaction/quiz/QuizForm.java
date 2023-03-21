@@ -9,7 +9,7 @@ import javax.persistence.*;
 
 @Builder
 @Entity
-@Table(name = "QUIZFORM")
+@Table(name = "QUIZ_FORM")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,22 +23,22 @@ public class QuizForm {
     @Column(name = "QUESTION", nullable = false)
     private String question;
 
-    @Column(name = "ANSWERA", nullable = false)
-    private String answerA;
+    @Column(name = "OPTION_A", nullable = false)
+    private String optionA;
 
-    @Column(name = "ANSWERB", nullable = false)
-    private String answerB;
+    @Column(name = "OPTION_B", nullable = false)
+    private String optionB;
 
-    @Column(name = "ANSWERC", nullable = false)
-    private String answerC;
+    @Column(name = "OPTION_C", nullable = false)
+    private String optionC;
 
-    @Column(name = "ANSWERD", nullable = false)
-    private String answerD;
+    @Column(name = "OPTION_D", nullable = false)
+    private String optionD;
 
-    @Column(name = "CORRECTANSWER", nullable = false)
+    @Column(name = "CORRECT_ANSWER", nullable = false)
     private String correctAnswer;
 
-    @Column(name = "TIMEPERQUESTION", nullable = false)
+    @Column(name = "TIME_PER_QUESTION", nullable = false)
     private int timePerQuestion;
 
 

@@ -11,7 +11,7 @@ public interface QuizFormService {
 
     List<QuizFormDto> getAllQuestions();
 
-    String createQuestion(QuizFormDto quizFormDto);
+    String createQuizForm(QuizFormDto quizFormDto);
 
 
 

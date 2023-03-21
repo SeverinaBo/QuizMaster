@@ -6,9 +6,7 @@ import { Box, Stack, AppBar, Toolbar, IconButton } from '@mui/material';
 import { bgBlur } from '../../../utils/cssStyles';
 // components
 
-//
 
-import ResponsiveAppBar from "./ResponsiveAppBar";
 
 
 
@@ -47,7 +45,7 @@ Header.propTypes = {
 export default function Header({ onOpenNav }) {
   return (
     <StyledRoot>
-        <ResponsiveAppBar />
+
         <StyledToolbar>
         <IconButton
           onClick={onOpenNav}

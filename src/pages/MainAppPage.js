@@ -1,4 +1,4 @@
-import ResponsiveAppBar from "../layouts/dashboard/header/ResponsiveAppBar";
+
 
 import {styled} from "@mui/material/styles";
 import useResponsive from "../hooks/useResponsive";
@@ -28,7 +28,7 @@ function MainAppPage() {
 
     return (
         <>
-            <ResponsiveAppBar/>
+
 
 
             {mdUp && (

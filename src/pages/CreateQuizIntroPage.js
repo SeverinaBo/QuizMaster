@@ -2,7 +2,7 @@ import {Button, Snackbar, TextField, Alert, Typography} from "@mui/material";
 import {styled} from "@mui/material/styles";
 import * as React from "react";
 
-import ResponsiveAppBar from "../layouts/dashboard/header/ResponsiveAppBar";
+
 import * as Yup from 'yup';
 import {Field, Formik} from "formik";
 import {useCreateQuizForm} from "../api/quizApi";
@@ -52,7 +52,7 @@ const CreateQuizIntroPage = ({fetchQuizzez, onClose, quiz}) => {
 
     return (
         <>
-            <ResponsiveAppBar/>
+
 
             <StyledContent>
 
