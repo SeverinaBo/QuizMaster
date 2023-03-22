@@ -30,8 +30,7 @@ private final QuizFormService quizService;
     }
 
     @PostMapping("/create")
-    public String createQuizForm(
-            @RequestParam("question") String question,
+    public String createQuizForm(@RequestParam("question") String question,
                                  @RequestParam("optionA") String optionA,
                                  @RequestParam("optionB") String optionB,
                                  @RequestParam("optionC") String optionC,

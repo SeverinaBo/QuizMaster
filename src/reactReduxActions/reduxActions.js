@@ -21,8 +21,20 @@ const quizezSlice = createSlice({
 
             state.quizez = currentQuestions;
         },
+        removeQuestion(state, action) {
+            const currentQuestions = [...state.quizez];
+            const existingQuestions = currentQuestions.find((quiz) => quiz.id === action.payload.id);
+
+            if (existingQuestions) {
+                existingQuestions.quantity--;
+            }
+
+            state.quizez = currentQuestions;
+        }
         },
     });
+
+
 
     const reduxStore = configureStore({
             reducer: quizezSlice.reducer,

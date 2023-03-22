@@ -20,7 +20,6 @@ import {useState} from "react";
 const quizFormValidationSchema = Yup.object().shape({
     question: Yup.string()
         .min(5, ({label, min}) => `${label} must be longer than ${min}`)
-        .max(50)
         .required()
         .label("Question"),
     optionA: Yup.string()
@@ -32,7 +31,9 @@ const quizFormValidationSchema = Yup.object().shape({
     optionD: Yup.string()
         .required(),
     correctAnswer: Yup.string()
-        .required()
+        .required(),
+    timePerQuestion: Yup.number()
+        .required(),
 })
 
 const CreateQuizForm = ({fetchQuestions, open, onClose, quiz}) => {
@@ -40,8 +41,8 @@ const CreateQuizForm = ({fetchQuestions, open, onClose, quiz}) => {
         const [alertOpen, setAlertOpen] = React.useState(false);
         const createQuizForm = useCreateQuizForm();
 
-        const [correctAnswer, setCorrectAnswer] = React.useState("a");
-        const [timePerQuestion, setTimePerQuestion] = useState(20);
+        const [correctAnswer, setCorrectAnswer] = React.useState('');
+        const [timePerQuestion, setTimePerQuestion] = useState('');
 
         const handleCorrectAnswerChange = (event) => {
             setCorrectAnswer(event.target.value);
@@ -50,8 +51,6 @@ const CreateQuizForm = ({fetchQuestions, open, onClose, quiz}) => {
             setTimePerQuestion(event.target.value);
 
         };
-
-
 
 
 
@@ -71,10 +70,11 @@ const initialQuizValues = quiz ? {
     optionB: '',
     optionC: '',
     optionD: '',
-    correctAnswer: 'a',
-    timePerQuestion: 20
+    correctAnswer: '',
+    timePerQuestion: ''
 }
-const title = quiz ? "Edit question" : "Add new question"
+const title = quiz ? "Edit question" : "Add new question";
+
 return (
     <>
         <StyledContent>
@@ -93,7 +93,6 @@ return (
                     {(props) => {
                         return (
     <>
-        {/*<PropState {...props}/>*/}
         <DialogContent>
             <Field label="Question"
                    name="question"
@@ -137,16 +136,12 @@ return (
                    as={TextField}
             />
 
-            <Grid item xs={6}
-                  required
-                  top-margin={1}
-            >
                 <InputLabel >Correct Answer</InputLabel>
                 <Select
+                    defaultValue="a"
                     value={correctAnswer}
                     label="Correct Answer"
                     name="correct"
-                    placeholder="Correct Answer"
                     fullWidth
                     onChange={handleCorrectAnswerChange}
                 >
@@ -155,14 +150,13 @@ return (
                     <MenuItem value="c">C</MenuItem>
                     <MenuItem value="d">D</MenuItem>
                 </Select>
-            </Grid>
+
             <InputLabel >Set Time</InputLabel>
             <Select
-                id="timer"
+                defaultValue={20}
                 value={timePerQuestion}
                 onChange={handleTimerChange}
                 name="timer"
-                placeholder="Set timer"
                 fullWidth
             >
                 <MenuItem value={20}>20 sec</MenuItem>
@@ -176,8 +170,7 @@ return (
 
 <DialogActions>
     <Button onClick={onClose}>Cancel</Button>
-    <Button disabled={props.isSubmitting}
-            onClick={props.submitForm}>Add</Button>
+    <Button disabled={props.isSubmitting} onClick={props.submitForm}>Add</Button>
 </DialogActions>
 
 </>
@@ -192,7 +185,7 @@ return (
           autoHideDuration={6000}
           onClose={() => setAlertOpen(false)}>
     <Alert onClose={() => setAlertOpen(false)} severity="success" sx={{width: '100%'}}>
-        Question created!!!
+        Question created
     </Alert>
 </Snackbar>
 </StyledContent>

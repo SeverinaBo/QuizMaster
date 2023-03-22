@@ -1,11 +1,14 @@
 import PropTypes from 'prop-types';
 // @mui
-import { Box, Card, Link, Typography, Stack } from '@mui/material';
+import {Box, Card,  Typography, Stack, Button} from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 // components
 
 import QuizList from "./QuizList";
+
+import {useNavigate} from "react-router-dom";
+
 
 // ----------------------------------------------------------------------
 
@@ -23,8 +26,10 @@ QuizList.propTypes = {
     quizzes: PropTypes.object,
 };
 
-export default function QuizCard({ quiz }) {
-    const { createdBy, quizTitle, cover, questAmount} = quiz;
+export default function QuizCard({ quiz, quizInfo }) {
+
+    const { createdBy, quizTitle, cover, questAmount } = quiz;
+    const navigate = useNavigate();
 
     return (
         <Card>
@@ -32,7 +37,17 @@ export default function QuizCard({ quiz }) {
                 <StyledQuizImg alt={quizTitle} src={cover} />
             </Box>
 
-            <Stack spacing={2} sx={{ p: 3 }}>
+
+            {quizInfo && (
+                <Stack spacing={2} sx={{ p: 3 }}>
+                    <Typography variant="h5">{quizTitle}</Typography>
+                    <Typography variant="body1">Created By: {createdBy}</Typography>
+                    <Typography variant="body1">Number of Questions: {questAmount}</Typography>
+                    {/* Render any other relevant quiz information */}
+                </Stack>
+            )}
+
+{/*            <Stack spacing={2} sx={{ p: 3 }}>
                 <Link color="inherit" underline="hover">
                     <Typography variant="subtitle2" noWrap>
                         {createdBy}
@@ -50,7 +65,7 @@ export default function QuizCard({ quiz }) {
                         </Typography>
                     </Typography>
                 </Stack>
-            </Stack>
+            </Stack>*/}
         </Card>
     );
 }

@@ -6,7 +6,7 @@ const getQuizez = () => HTTP.get("/quiz/all")
     .then(response => response.data)
 
 // http://localhost:8080/quiz/create
-const createQuizForm = (quizForm) => HTTP.post("/quiz/create", quizForm)
+/*const createQuizForm = (quizForm) => HTTP.post("/quiz/create", quizForm)*/
 
 const createQuizJson = (quizForm) => HTTP.post("/quiz", {...quizForm, name: quizForm.question})
     .then(response => new Promise((resolve) => {
@@ -24,4 +24,4 @@ const useCreateQuizForm = (config) => {
     return mutation.mutateAsync
 }
 
-export { createQuizForm, useQuiz, useCreateQuizForm }
+export { /*createQuizForm, */useQuiz, useCreateQuizForm }
