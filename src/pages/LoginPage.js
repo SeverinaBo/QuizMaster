@@ -5,7 +5,7 @@ import { Container, Typography} from '@mui/material';
 
 // sections
 import {Link} from "react-router-dom";
-import {LoginForm} from '../sections/auth/login';
+import {LoginForm} from '../auth/login';
 
 import useResponsive from '../hooks/useResponsive';
 // components

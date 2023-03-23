@@ -6,11 +6,11 @@ const getQuizez = () => HTTP.get("/quiz/all")
     .then(response => response.data)
 
 // http://localhost:8080/quiz/create
-/*const createQuizForm = (quizForm) => HTTP.post("/quiz/create", quizForm)*/
+const createQuizForm = (quizForm) => HTTP.post("/quiz", quizForm)
 
-const createQuizJson = (quizForm) => HTTP.post("/quiz", {...quizForm, name: quizForm.question})
+const createQuizJson = (quizForm) => HTTP.post("/quiz", {...quizForm, question: quizForm.quizQuestion})
     .then(response => new Promise((resolve) => {
-        setTimeout(() => resolve(response.data), 5000)
+        setTimeout(() => resolve(response.data), 3000)
     }))
 
 // custom hook(useQuiz) to fetch quizzez from backend
@@ -24,4 +24,4 @@ const useCreateQuizForm = (config) => {
     return mutation.mutateAsync
 }
 
-export { /*createQuizForm, */useQuiz, useCreateQuizForm }
+export { createQuizForm, useQuiz, useCreateQuizForm }

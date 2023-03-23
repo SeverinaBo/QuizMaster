@@ -1,4 +1,13 @@
-import {Button, Snackbar, TextField, Alert, Typography} from "@mui/material";
+import {
+    Button,
+    Snackbar,
+    TextField,
+    Alert,
+    Typography,
+    DialogTitle,
+    LinearProgress,
+    DialogActions, DialogContent, Dialog
+} from "@mui/material";
 import {styled} from "@mui/material/styles";
 import * as React from "react";
 
@@ -6,8 +15,6 @@ import * as React from "react";
 import * as Yup from 'yup';
 import {Field, Formik} from "formik";
 import {useCreateQuizForm} from "../api/quizApi";
-
-
 
 
 export const StyledContent = styled('div')(({theme}) => ({
@@ -23,7 +30,7 @@ export const StyledContent = styled('div')(({theme}) => ({
 const quizIntroValidationSchema = Yup.object().shape({
     createdBy: Yup.string()
         .min(5, ({label, min}) => `${label} must be greater than ${min} chars`)
-        .max(50)
+
         .required()
         .label("Your Name"),
     quizTitle: Yup.string()
@@ -32,7 +39,7 @@ const quizIntroValidationSchema = Yup.object().shape({
         .required()
 })
 
-const CreateQuizIntroPage = ({fetchQuizzez, onClose, quiz}) => {
+const CreateQuizIntroPage = ({fetchQuizzez, onClose, open, quiz}) => {
 
     const [alertOpen, setAlertOpen] = React.useState(false);
 
@@ -40,99 +47,101 @@ const CreateQuizIntroPage = ({fetchQuizzez, onClose, quiz}) => {
 
 
     const initialQuizIntroValues = quiz ? {
-        id : quiz.id,
+        id: quiz.id,
         createdBy: quiz.createdBy,
         quizTitle: quiz.quizTitle
-    }: {
-        id : null,
+    } : {
+        id: null,
         createdBy: '',
         quizTitle: ''
     }
-
+    const title = quiz ? "Edit info" : "Add info for quiz";
 
     return (
         <>
 
-
             <StyledContent>
+                <Dialog open={open} onClose={onClose}>
+                    <DialogTitle>{title}</DialogTitle>
 
-                <Formik initialValues={initialQuizIntroValues}
-                        onSubmit={async (quiz, {setSubmitting}) => {
-                        await createQuiz(quiz)
+                    <Formik initialValues={initialQuizIntroValues}
+                            onSubmit={async (quiz, {setSubmitting}) => {
+                                await createQuiz(quiz)
 
-                            setSubmitting(false)
-                            onClose()
-                            fetchQuizzez()
-                            setAlertOpen(true)
-                        }}
-                        validationSchema={quizIntroValidationSchema}>
-                    {(props) => {
-                        return(
-                        <>
-                <Typography variant="h3" sx={{mb: 5}}>
-                    Create New Quiz
-                </Typography>
+                                setSubmitting(false)
+                                onClose()
+                                fetchQuizzez()
+                                setAlertOpen(true)
+                            }}
+                            validationSchema={quizIntroValidationSchema}>
+                        {(props) => {
+                            return (
+                                <>
+                                    <Typography variant="h3" sx={{mb: 5}}>
+                                        Create New Quiz
+                                    </Typography>
 
-                <Typography variant="h5" sx={{mb: 1}}>
-                    Created by:
-                </Typography>
-                <Field placeholder="Your name"
-                           name="name"
+                                        <DialogContent>
+                                            <Field label="created by"
+                                                   name="createdBy"
+                                                   fullWidth
+                                                   error={!!props.errors.createdBy && props.touched.createdBy}
+                                                   helperText={props.touched.createdBy && props.errors["createdBy"]}
+                                                   as={TextField}
+                                            />
+                                            <Field placeholder="Quiz Title"
+                                                   name="quizTitle"
+                                                   required
+                                                   fullWidth
+                                                   error={!!props.errors.quizTitle && props.touched.quizTitle}
+                                                   helperText={props.touched.quizTitle && props.errors["quizTitle"]}
+                                                   as={TextField}
+                                            />
+                                            <Field placeholder="Quiz Main cover"
+                                                   name="quizCover"
+                                                   required
+                                                   fullWidth
+                                                   as={TextField}
+                                            />
 
-                           required
-                           fullWidth
-                       error={!!props.errors.createdBy && props.touched.createdBy}
-                       helperText={props.touched.createdBy && props.errors["createdBy"]}
-                           as={TextField}
-                />
+                                            {props.isSubmitting && <LinearProgress color="inherit"/>}
+                                        </DialogContent>
 
-                            <Typography variant="h5" sx={{mb: 1}}>
-                                Quiz Title:
-                            </Typography>
-                <Field placeholder="Quiz Title"
-                           name="quizTitle"
-                           required
-                           fullWidth
-                       error={!!props.errors.quizTitle && props.touched.quizTitle}
-                       helperText={props.touched.quizTitle && props.errors["quizTitle"]}
-                       as={TextField}
-                />
-                <Field placeholder="Quiz Main cover"
-                       name="quizCover"
-                       required
-                       fullWidth
+                                        <DialogActions>
+                                            <Button
+                                                style={{
+                                                    fontSize: "1.6rem",
+                                                    textAlign: "center",
+                                                    fontWeight: "bold",
+                                                    margin: "1rem 0"
+                                                }}
+                                                variant="contained"
+                                                color="primary"
+                                                fullWidth
+                                                disabled={props.isSubmitting} onClick={props.submitForm}
+                                            >
+                                                Save & continue
+                                            </Button>
+                                        </DialogActions>
+                                    </>
+                                    )
+                                    }}
 
-                       as={TextField}
-                />
+                    </Formik>
+                </Dialog>
 
-                <Button
-                    style={{
-                        fontSize: "1.6rem",
-                        textAlign: "center",
-                        fontWeight: "bold",
-                        margin: "1rem 0"
-                    }}
-                    variant="contained"
-                    color="primary"
-                    fullWidth
-                    disabled={props.isSubmitting} onClick={props.submitForm}
-                >
-                   Save & continue
-                </Button>
-                    </>
-                    )}}
-                </Formik>
+
+                <Snackbar open={alertOpen}
+                          anchorOrigin={{vertical: 'top', horizontal: 'center'}}
+                          autoHideDuration={6000}
+                          onClose={() => setAlertOpen(false)}>
+                    <Alert onClose={() => setAlertOpen(false)} severity="success" sx={{width: '100%'}}>
+                        Quiz intro created!
+                    </Alert>
+                </Snackbar>
             </StyledContent>
-            <Snackbar open={alertOpen}
-                      anchorOrigin={{vertical: 'top', horizontal: 'center'}}
-                      autoHideDuration={6000}
-                      onClose={() => setAlertOpen(false)}>
-                <Alert onClose={() => setAlertOpen(false)} severity="success" sx={{width: '100%'}}>
-                    Quiz intro created!!!
-                </Alert>
-            </Snackbar>
         </>
     )
 }
 
-export default CreateQuizIntroPage;
+    export default CreateQuizIntroPage;

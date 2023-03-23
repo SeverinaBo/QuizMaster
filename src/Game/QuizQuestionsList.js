@@ -15,6 +15,8 @@ import {reduxActions} from "../reactReduxActions/reduxActions";
 import {styled} from "@mui/material/styles";
 import CreateQuizForm from "../Quizzez/CreateQuizForm";
 import {useDispatch} from "react-redux";
+import CreateQuizIntroPage from "../pages/CreateQuizIntroPage";
+
 
 
 
@@ -40,9 +42,13 @@ const QuizQuestionsList = () => {
 
 
         const navigate = useNavigate();
-        const {isFetching, quizez = [], refetch} = useQuiz();
+
+
+
         const [openQuestionModal, setOpenQuestionModal] = useState(false);
+
         const [editQuestion, setEditQuestion] = useState(null);
+    const {isFetching, quizez = [], refetch} = useQuiz();
 
    /* const [quizInfo, setQuizInfo] = useState(null);*/
 
@@ -65,27 +71,26 @@ const QuizQuestionsList = () => {
 
   const quizListElements = quizez.map((questionList, i) => (
             <TableRow key={i}>
-                {/*<TableCell>{questionList.createdBy}</TableCell>
-        <TableCell>{questionList.quizTitle}</TableCell>*/}
+                <TableCell>{questionList.createdBy}</TableCell>
+                 <TableCell>{questionList.quizTitle}</TableCell>
                 <TableCell>{questionList.question}</TableCell>
                 <TableCell>{questionList.optionA}</TableCell>
                 <TableCell>{questionList.optionB}</TableCell>
                 <TableCell>{questionList.optionC}</TableCell>
                 <TableCell>{questionList.optionD}</TableCell>
                 <TableCell>{questionList.correctAnswer}</TableCell>
-                <TableCell>{questionList.timePerQuestion}</TableCell>
                 <TableCell>
                  {/*     <Button variant="contained" onClick={() => navigate(`/quizez/${questionList.id}`)}>
                      Preview
                     </Button>*/}
-                    <IconButton
+           {/*         <IconButton
                         onClick={() => {
                             setOpenQuestionModal(true);
                             setEditQuestion(questionList);
                         }}
                     >
                         <EditIcon/>
-                    </IconButton>
+                    </IconButton>*/}
 
                     <IconButton
                         onClick={() =>
@@ -95,6 +100,21 @@ const QuizQuestionsList = () => {
                         <DeleteIcon/>
                     </IconButton>
 
+                    <IconButton
+                        onClick={() =>
+                            addQuestion({
+                                id: questionList.id,
+                                createdBy: questionList.createdBy,
+                                quizTitle: questionList.quizTitle,
+                                question: questionList.question,
+                                optionA: questionList.optionA,
+                                optionB: questionList.optionB,
+                                correctAnswer: questionList.correctAnswer,
+                            })
+                        }
+                    >
+                        <EditIcon />
+                    </IconButton>
 
                 </TableCell>
             </TableRow>
@@ -106,25 +126,29 @@ const QuizQuestionsList = () => {
                 <Table size="small">
                     <TableHead>
                         <TableRow>
-                            {/*              <TableCell>Created By</TableCell>
-                            <TableCell>Quiz Title</TableCell>*/}
+                            <TableCell>Created By</TableCell>
+                            <TableCell>Quiz Title</TableCell>
                             <TableCell>Question</TableCell>
                             <TableCell>Answer A</TableCell>
                             <TableCell>Answer B</TableCell>
                             <TableCell>Answer C</TableCell>
                             <TableCell>Answer D</TableCell>
                             <TableCell>Correct Answer</TableCell>
-                            <TableCell>Time for question</TableCell>
                             <TableCell>Edit/Remove</TableCell>
                             <TableCell></TableCell>
                         </TableRow>
                     </TableHead>
+
                     <TableBody>{loadingElement || noQuestionsElement || quizListElements}</TableBody>
                 </Table>
 
-                {/*<AddQuestion/>*/}
-                <CreateQuizForm fetchQuestions={refetch} open={openQuestionModal}
-                                onClose={() => setOpenQuestionModal(false)} quiz={editQuestion}/>
+
+
+                <CreateQuizForm
+                    fetchQuestions={refetch}
+                    open={openQuestionModal}
+                                onClose={() => setOpenQuestionModal(false)}
+                    quizForm={editQuestion}/>
                 <div style={{marginTop: "10px", textAlign: "center"}}>
                     <Button
                         variant="outlined"

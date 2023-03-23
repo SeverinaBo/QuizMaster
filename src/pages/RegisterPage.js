@@ -5,7 +5,7 @@ import { Container, Typography} from '@mui/material';
 
 import {Link} from "react-router-dom";
 import useResponsive from '../hooks/useResponsive';
-import RegForm from "../sections/auth/registration/RegForm";
+import RegForm from "../auth/registration/RegForm";
 // components
 
 

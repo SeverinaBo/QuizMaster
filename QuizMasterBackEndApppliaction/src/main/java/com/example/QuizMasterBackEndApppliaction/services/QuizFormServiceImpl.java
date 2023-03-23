@@ -44,7 +44,6 @@ public class QuizFormServiceImpl implements QuizFormService {
                 .optionC(quizFormDto.getOptionC())
                 .optionD(quizFormDto.getOptionD())
                 .correctAnswer(quizFormDto.getCorrectAnswer())
-                .timePerQuestion(quizFormDto.getTimePerQuestion())
                 .build();
     }
 
@@ -59,7 +58,6 @@ public class QuizFormServiceImpl implements QuizFormService {
                         .optionC(o.getOptionC())
                         .optionD(o.getOptionD())
                         .correctAnswer(o.getCorrectAnswer())
-                        .timePerQuestion(o.getTimePerQuestion())
                         .build())
                 .collect(Collectors.toList());
     }}

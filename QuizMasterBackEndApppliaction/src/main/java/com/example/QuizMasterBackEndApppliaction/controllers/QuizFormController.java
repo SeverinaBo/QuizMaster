@@ -13,11 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/quiz")
 @Api(tags = {"this is a quiz controller", "with string array description"})
 public class QuizFormController {
-
-
 private final QuizFormService quizService;
-
-
 
     @GetMapping("/all")
     public List<QuizFormDto> getAllQuestions(){
@@ -29,14 +25,18 @@ private final QuizFormService quizService;
         return quizService.createQuizForm(quizForm);
     }
 
+    @PostMapping
+    public String createQuizIntro(@RequestBody QuizFormDto quizForm){
+        return quizService.createQuizForm(quizForm);
+    }
+
     @PostMapping("/create")
     public String createQuizForm(@RequestParam("question") String question,
                                  @RequestParam("optionA") String optionA,
                                  @RequestParam("optionB") String optionB,
                                  @RequestParam("optionC") String optionC,
                                  @RequestParam("optionD") String optionD,
-                                 @RequestParam("correctAnswer") String correctAnswer,
-                                @RequestParam("timePerQuestion") int timePerQuestion)
+                                 @RequestParam("correctAnswer") String correctAnswer)
             throws IOException {
         QuizFormDto dto = QuizFormDto.builder()
                 .question(question)
@@ -45,7 +45,6 @@ private final QuizFormService quizService;
                 .optionC(optionC)
                 .optionD(optionD)
                 .correctAnswer(correctAnswer)
-                .timePerQuestion(timePerQuestion)
                 .build();
 
         return quizService.createQuizForm(dto);

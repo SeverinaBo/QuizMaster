@@ -8,14 +8,11 @@ import {Field, Form, Formik} from "formik";
 import * as React from "react";
 import * as Yup from 'yup';
 // components
-import Iconify from '../../../components/iconify';
+import Iconify from '../../components/iconify';
 
 // ----------------------------------------------------------------------
 
 const signupValidationSchema = Yup.object().shape({
-    name: Yup.string()
-        .min(2,'Must be longer than 2 char')
-        .required('Required'),
     email: Yup.string()
         .email('Invalid email adress')
         .required('Required'),
@@ -24,7 +21,7 @@ const signupValidationSchema = Yup.object().shape({
         .required('Required'),
 })
 
-export default function RegForm() {
+export default function LoginForm() {
 
     const navigate = useNavigate();
 
@@ -35,11 +32,9 @@ export default function RegForm() {
     }
     return (
         <>
-            <Stack spacing={4} >
-
+            <Stack spacing={3} >
                 <Formik
                     initialValues={{
-                        name:'',
                         email: '',
                         password: '',
                     }}
@@ -50,15 +45,6 @@ export default function RegForm() {
                     {({errors, touched}) => (
                         <Form>
                             <Typography variant="h6" sx={{ mb: 5 }}>
-                                <Field id="name"
-                                       name="name"
-                                       label="Name"
-                                       variant="outlined"
-                                       fullWidth
-                                       error={!!errors.name && touched.name}
-                                       helperText={touched.name && errors.name}
-                                       as={TextField}
-                                       />
 
                             <Field id="email"
                                    name="email"
@@ -69,7 +55,7 @@ export default function RegForm() {
                                    helperText={touched.email && errors.email}
                                    as={TextField}
                             />
-
+                            </Typography>
 
                             <Field id="password"
                                    name="password"
@@ -92,7 +78,6 @@ export default function RegForm() {
                                        ),
                                    }}
                             />
-                            </Typography>
                     <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{my: 2}}>
                         <Checkbox name="remember" label="Remember me"/>
                         <Link variant="subtitle2" underline="hover">
@@ -101,7 +86,7 @@ export default function RegForm() {
                     </Stack>
 
                 <Button fullWidth size="large" type="submit" variant="contained" onClick={handleClick}>
-                    Register
+                    Login
                 </Button>
 
                 </Form>

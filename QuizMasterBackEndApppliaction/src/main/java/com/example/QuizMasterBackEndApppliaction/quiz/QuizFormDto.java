@@ -23,6 +23,4 @@ public class QuizFormDto {
     private String optionD;
     private String correctAnswer;
 
-    private int timePerQuestion;
-
 }

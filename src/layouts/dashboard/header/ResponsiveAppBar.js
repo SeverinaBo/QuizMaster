@@ -17,7 +17,7 @@ import AccountPopover from "./AccountPopover";
 import HeaderNavigation from "./HeaderNavigation";
 
 import Pages from "../../../pages/Pages";
-import AppFooter from "../footer/AppFooter";
+import AppFooter from "../../footer/AppFooter";
 
 
 

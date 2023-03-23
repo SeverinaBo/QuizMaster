@@ -31,7 +31,7 @@ const AddQuestion = () => {
     const [answerD, setAnswerD] = React.useState("");
 
     const [correctAnswer, setCorrectAnswer] = React.useState("A");
-    /* const [timePerQuestion, setTimePerQuestion] = useState(20); */
+
 
 
 
@@ -42,10 +42,6 @@ const AddQuestion = () => {
 
 
 
- /*   const handleTimerChange = (event) => {
-        setTimePerQuestion(event.target.value);
-        onTimeChange(event.target.value);
-    }; */
 
 
     const handleClick = () => {
@@ -71,8 +67,6 @@ const AddQuestion = () => {
         formData.append("answerC", answerC);
         formData.append("answerD", answerD);
         formData.append("correctAnswer", correctAnswer);
-       /* formData.append("timePerQuestion", timePerQuestion);
-*/
         return formData;
     };
 
@@ -122,23 +116,6 @@ const AddQuestion = () => {
                                 <MenuItem value="d">D</MenuItem>
                             </Select>
                         </Grid>
-
-
-                        <InputLabel id="select-label">Set Time</InputLabel>
-                        <Select
-                            labelId="select-label"
-                            id="select"
-                       /*     value={timePerQuestion}
-                            onChange={handleTimerChange} */
-                            name="time"
-                            placeholder="Set timer"
-                            fullWidth
-                        >
-                            <MenuItem value={20}>20 sec</MenuItem>
-                            <MenuItem value={25}>25 sec</MenuItem>
-                            <MenuItem value={30}>30 sec</MenuItem>
-                            <MenuItem value={40}>40 sec</MenuItem>
-                        </Select>
 
 
                     </DialogContent>

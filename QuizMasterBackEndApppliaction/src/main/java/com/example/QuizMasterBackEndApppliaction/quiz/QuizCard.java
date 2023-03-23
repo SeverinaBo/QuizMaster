@@ -1,17 +1,23 @@
 package com.example.QuizMasterBackEndApppliaction.quiz;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+
+@Builder
+@Entity
+@Table(name = "USER_QUIZ_CARDS")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class QuizCard {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
-
-    private String createdBy;
 
     private String quizTitle;
 

@@ -1,14 +1,29 @@
 import PropTypes from 'prop-types';
 // @mui
-import {Box, Card,  Typography, Stack, Button} from '@mui/material';
+import {
+    Box,
+    Card,
+    Typography,
+    Stack,
+    Button,
+    DialogTitle,
+    Dialog,
+    TableCell,
+    TableRow,
+    DialogContent
+} from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 // components
 
 import QuizList from "./QuizList";
 
-import {useNavigate} from "react-router-dom";
-
+import {Link, useNavigate} from "react-router-dom";
+import QuestionPreview from "./QuestionPreview";
+import {useQuiz} from "../api/quizApi";
+import {useSelector} from "react-redux";
+import * as React from "react";
+import {useState} from "react";
 
 // ----------------------------------------------------------------------
 
@@ -26,32 +41,43 @@ QuizList.propTypes = {
     quizzes: PropTypes.object,
 };
 
-export default function QuizCard({ quiz, quizInfo }) {
 
-    const { createdBy, quizTitle, cover, questAmount } = quiz;
+
+export default function QuizCard({ quiz }) {
+
+    const { quizTitle, cover} = useQuiz;
     const navigate = useNavigate();
+    const [openQuizModal, setOpenQuizModal] = useState(false);
+    const useQuizInfo = useQuiz();
+
+    const quizez = useSelector((state) => state.quizez);
+
+
+
 
     return (
-        <Card>
+        <>
+        <Card onClick={() => navigate(`/create`)}>
+
             <Box sx={{ pt: '100%', position: 'relative' }}>
                 <StyledQuizImg alt={quizTitle} src={cover} />
             </Box>
 
 
-            {quizInfo && (
+      {/*      {quizInfo && (
                 <Stack spacing={2} sx={{ p: 3 }}>
                     <Typography variant="h5">{quizTitle}</Typography>
                     <Typography variant="body1">Created By: {createdBy}</Typography>
                     <Typography variant="body1">Number of Questions: {questAmount}</Typography>
-                    {/* Render any other relevant quiz information */}
+                     Render any other relevant quiz information
                 </Stack>
-            )}
+            )}*/}
 
-{/*            <Stack spacing={2} sx={{ p: 3 }}>
+
+            <Stack spacing={2} sx={{ p: 3 }}>
                 <Link color="inherit" underline="hover">
                     <Typography variant="subtitle2" noWrap>
-                        {createdBy}
-                        {quizTitle}
+                       author
                     </Typography>
                 </Link>
 
@@ -61,11 +87,22 @@ export default function QuizCard({ quiz, quizInfo }) {
                             component="span"
                             variant="body1"
                         >
-                            {questAmount}
+                            amount
                         </Typography>
                     </Typography>
                 </Stack>
-            </Stack>*/}
+            </Stack>
         </Card>
+
+            <QuestionPreview open={openQuizModal}/>
+            <Button
+                variant="outlined"
+                onClick={() => {
+                    setOpenQuizModal(true);
+                }}
+            >
+                Preview Quiz
+            </Button>
+            </>
     );
 }

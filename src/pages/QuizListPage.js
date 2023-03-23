@@ -7,11 +7,12 @@ import QuizList from "../Quizzez/QuizList";
 import quizzez from "../_mock/quizzez";
 
 
-// components
-
 // ----------------------------------------------------------------------
 
+
+
 export default function QuizListPage() {
+
 
 
     return (
@@ -26,7 +27,9 @@ export default function QuizListPage() {
                        sx={{mb: 5}}/>
                 <Stack direction="row" spacing={1} flexShrink={0} sx={{my: 1}}/>
 
+
                     <QuizList quizzes={quizzez} />
+
 
             </Container>
 
