@@ -14,7 +14,7 @@ import * as React from "react";
 
 import * as Yup from 'yup';
 import {Field, Formik} from "formik";
-import {useCreateQuizForm} from "../api/quizApi";
+import {useCreateQuizForm} from "../../api/quizApi";
 
 
 export const StyledContent = styled('div')(({theme}) => ({

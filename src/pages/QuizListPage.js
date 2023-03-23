@@ -3,7 +3,7 @@
 import {Container, Stack, Typography} from '@mui/material';
 
 
-import QuizList from "../Quizzez/QuizList";
+import QuizList from "../Game/quizList/QuizList";
 import quizzez from "../_mock/quizzez";
 
 

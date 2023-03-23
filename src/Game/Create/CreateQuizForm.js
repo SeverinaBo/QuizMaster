@@ -2,7 +2,7 @@ import {
     Alert,
     Button, Dialog,
     DialogActions, DialogContent,
-    DialogTitle, Grid, InputLabel,
+    DialogTitle, InputLabel,
     LinearProgress, MenuItem, Select,
     Snackbar,
     TextField
@@ -10,9 +10,9 @@ import {
 import * as React from "react";
 import * as Yup from "yup";
 import {Field, Formik} from "formik";
-import {useCreateQuizForm} from "../api/quizApi";
-import {StyledContent} from "../Game/QuizQuestionsList";
-import {useState} from "react";
+import {useCreateQuizForm} from "../../api/quizApi";
+import {StyledContent} from "./QuizQuestionsTable";
+
 
 
 const quizFormValidationSchema = Yup.object().shape({
@@ -27,19 +27,19 @@ const quizFormValidationSchema = Yup.object().shape({
     optionC: Yup.string()
         .required(),
     optionD: Yup.string()
-        .required(),
-    correctAnswer: Yup.string()
         .required()
+ /*   correctAnswer: Yup.string()
+        .required()*/
 })
 
 const CreateQuizForm = ({fetchQuestions, open, onClose, quizForm}) => {
 
         const [alertOpen, setAlertOpen] = React.useState(false);
         const createQuizForm = useCreateQuizForm();
-        const [correctAnswer, setCorrectAnswer] = React.useState('');
+       /* const [correctAnswer, setCorrectAnswer] = React.useState('');
         const handleCorrectAnswerChange = (event) => {
             setCorrectAnswer(event.target.value);
-        }
+        }*/
 
         const initialQuizValues = quizForm ? {
             id: quizForm.id,
@@ -47,16 +47,16 @@ const CreateQuizForm = ({fetchQuestions, open, onClose, quizForm}) => {
             optionA: quizForm.optionA,
             optionB: quizForm.optionB,
             optionC: quizForm.optionC,
-            optionD: quizForm.optionD,
-            correctAnswer: quizForm.correctAnswer
+            optionD: quizForm.optionD
+    /*        correctAnswer: quizForm.correctAnswer*/
         } : {
             id: null,
             quizQuestion: '',
             optionA: '',
             optionB: '',
             optionC: '',
-            optionD: '',
-            correctAnswer: ''
+            optionD: ''
+           /* correctAnswer: ''*/
         }
         const title = quizForm ? "Edit question" : "Add new question";
 
@@ -81,7 +81,7 @@ const CreateQuizForm = ({fetchQuestions, open, onClose, quizForm}) => {
                                     <>
                                         <DialogContent>
                                             <Field label="Question"
-                                                   name="question"
+                                                   name="quizQuestion"
                                                    variant="standard"
                                                    fullWidth
                                                    error={!!props.errors.quizQuestion && props.touched.quizQuestion}
@@ -122,12 +122,12 @@ const CreateQuizForm = ({fetchQuestions, open, onClose, quizForm}) => {
                                                    as={TextField}
                                             />
 
-                                            <InputLabel>Correct Answer</InputLabel>
+                                    {/*        <InputLabel>Correct Answer</InputLabel>
                                             <Select
                                                 defaultValue="a"
                                                 value={correctAnswer}
                                                 label="Correct Answer"
-                                                name="correct"
+                                                name="correctAnswer"
                                                 fullWidth
                                                 onChange={handleCorrectAnswerChange}
                                             >
@@ -136,11 +136,10 @@ const CreateQuizForm = ({fetchQuestions, open, onClose, quizForm}) => {
                                                 <MenuItem value="c">C</MenuItem>
                                                 <MenuItem value="d">D</MenuItem>
                                             </Select>
-
+*/}
 
                                             {props.isSubmitting && <LinearProgress color="inherit"/>}
                                         </DialogContent>
-
                                         <DialogActions>
                                             <Button onClick={onClose}>Cancel</Button>
                                             <Button disabled={props.isSubmitting} onClick={props.submitForm}>Add</Button>
@@ -155,7 +154,7 @@ const CreateQuizForm = ({fetchQuestions, open, onClose, quizForm}) => {
 
                     <Snackbar open={alertOpen}
                               anchorOrigin={{vertical: 'top', horizontal: 'center'}}
-                              autoHideDuration={6000}
+                              autoHideDuration={3000}
                               onClose={() => setAlertOpen(false)}>
                         <Alert onClose={() => setAlertOpen(false)} severity="success" sx={{width: '100%'}}>
                             Question created

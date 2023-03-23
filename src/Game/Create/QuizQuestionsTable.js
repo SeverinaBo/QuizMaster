@@ -9,13 +9,13 @@ import EditIcon from '@mui/icons-material/Edit';
 
 import { useState } from "react";
 import {useNavigate} from "react-router-dom";
-import {useQuiz} from "../api/quizApi";
+import {useQuiz} from "../../api/quizApi";
 
-import {reduxActions} from "../reactReduxActions/reduxActions";
+import {reduxActions} from "../../reactReduxActions/reduxActions";
 import {styled} from "@mui/material/styles";
-import CreateQuizForm from "../Quizzez/CreateQuizForm";
+import CreateQuizForm from "./CreateQuizForm";
 import {useDispatch} from "react-redux";
-import CreateQuizIntroPage from "../pages/CreateQuizIntroPage";
+import CreateQuizIntroPage from "./CreateQuizIntroPage";
 
 
 
@@ -30,7 +30,7 @@ export const StyledContent = styled('div')(({theme}) => ({
     padding: theme.spacing(12, 0),
 }));
 
-const QuizQuestionsList = () => {
+const QuizQuestionsTable = () => {
 
     const dispatch = useDispatch();
     const addQuestion = (question) => {
@@ -55,7 +55,7 @@ const QuizQuestionsList = () => {
 
     const loadingElement = isFetching && (
             <TableRow>
-                <TableCell colSpan={10} align="center">
+                <TableCell colSpan={8} align="center">
                     <LinearProgress/>
                 </TableCell>
             </TableRow>
@@ -63,7 +63,7 @@ const QuizQuestionsList = () => {
 
         const noQuestionsElement = !quizez.length && (
             <TableRow>
-                <TableCell colSpan={10} align="center">
+                <TableCell colSpan={8} align="center">
                     No questions found
                 </TableCell>
             </TableRow>
@@ -71,8 +71,6 @@ const QuizQuestionsList = () => {
 
   const quizListElements = quizez.map((questionList, i) => (
             <TableRow key={i}>
-                <TableCell>{questionList.createdBy}</TableCell>
-                 <TableCell>{questionList.quizTitle}</TableCell>
                 <TableCell>{questionList.question}</TableCell>
                 <TableCell>{questionList.optionA}</TableCell>
                 <TableCell>{questionList.optionB}</TableCell>
@@ -104,11 +102,11 @@ const QuizQuestionsList = () => {
                         onClick={() =>
                             addQuestion({
                                 id: questionList.id,
-                                createdBy: questionList.createdBy,
-                                quizTitle: questionList.quizTitle,
                                 question: questionList.question,
                                 optionA: questionList.optionA,
                                 optionB: questionList.optionB,
+                                optionC: questionList.optionC,
+                                optionD: questionList.optionD,
                                 correctAnswer: questionList.correctAnswer,
                             })
                         }
@@ -126,8 +124,6 @@ const QuizQuestionsList = () => {
                 <Table size="small">
                     <TableHead>
                         <TableRow>
-                            <TableCell>Created By</TableCell>
-                            <TableCell>Quiz Title</TableCell>
                             <TableCell>Question</TableCell>
                             <TableCell>Answer A</TableCell>
                             <TableCell>Answer B</TableCell>
@@ -181,4 +177,4 @@ const QuizQuestionsList = () => {
         )
     }
 
-export default QuizQuestionsList
+export default QuizQuestionsTable

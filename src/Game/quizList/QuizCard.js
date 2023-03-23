@@ -20,7 +20,7 @@ import QuizList from "./QuizList";
 
 import {Link, useNavigate} from "react-router-dom";
 import QuestionPreview from "./QuestionPreview";
-import {useQuiz} from "../api/quizApi";
+import {useQuiz} from "../../api/quizApi";
 import {useSelector} from "react-redux";
 import * as React from "react";
 import {useState} from "react";

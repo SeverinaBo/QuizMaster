@@ -43,7 +43,7 @@ public class QuizFormServiceImpl implements QuizFormService {
                 .optionB(quizFormDto.getOptionB())
                 .optionC(quizFormDto.getOptionC())
                 .optionD(quizFormDto.getOptionD())
-                .correctAnswer(quizFormDto.getCorrectAnswer())
+                /*.correctAnswer(quizFormDto.getCorrectAnswer())*/
                 .build();
     }
 
@@ -57,47 +57,12 @@ public class QuizFormServiceImpl implements QuizFormService {
                         .optionB(o.getOptionB())
                         .optionC(o.getOptionC())
                         .optionD(o.getOptionD())
-                        .correctAnswer(o.getCorrectAnswer())
+                       /* .correctAnswer(o.getCorrectAnswer())*/
                         .build())
                 .collect(Collectors.toList());
-    }}
-
-/*        quizzez.forEach(quizForm -> {
-            quizzezDto.add(QuizFormDto
-                    .builder()
-                    .id(quizForm.getId())
-                    .question(quizForm.getQuestion())
-                    .answerA(quizForm.getAnswerA())
-                    .answerB(quizForm.getAnswerB())
-                    .answerC(quizForm.getAnswerC())
-                    .answerD(quizForm.getAnswerD())
-                    .correctAnswer(quizForm.getCorrectAnswer())
-                    .timePerQuestion(quizForm.getTimePerQuestion())
-                    .build());
-        });
-        return quizzezDto;
-    }*/
-
-
-
-/*
-
-    public Optional<QuizDto> getQuizById(Long id) {
-        return quizRepo.findById(id);
     }
+}
 
-
-
-
-    public QuizDto save(QuizDto quizDto){
-        return quizRepo.save(quizDto);
-    }
-
-    public void deleteById(Long id){
-        quizRepo.deleteById(id);
-    }
-
-*/
 
 
 

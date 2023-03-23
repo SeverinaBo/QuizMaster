@@ -1,7 +1,7 @@
 import React, {useRef, useState, useEffect, Fragment} from 'react';
 import { Helmet } from 'react-helmet';
 
-import {StyledContent} from "../QuizQuestionsList";
+import {StyledContent} from "../Create/QuizQuestionsTable";
 
 import {questions} from '../../_mock/questions'
 import isEmpty from '../../utils/is-empty';
