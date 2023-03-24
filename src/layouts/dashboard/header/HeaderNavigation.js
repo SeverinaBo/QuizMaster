@@ -2,6 +2,7 @@ import * as React from "react";
 import {Link} from "react-router-dom";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import { Translation } from "react-i18next";
 
 const HeaderNavigation = () => {
     const [setAnchorElNav] = React.useState(null);
@@ -12,7 +13,9 @@ const HeaderNavigation = () => {
 
 
     return (
-        <>
+        <Translation>
+            {(t, { i18n }) => (
+                <>
             <Box sx={{flexGrow: 1, display: {xs: 'none', md: 'flex'}}}>
                 <Button
                     component={Link}
@@ -20,34 +23,7 @@ const HeaderNavigation = () => {
                     onClick={handleCloseNavMenu}
                     sx={{my: 2, color: 'white', display: 'block'}}
                 >
-                    Home
-                </Button>
-
-                {/*    <Button
-                element={Link}
-                to={'/join'}
-                onClick={handleCloseNavMenu}
-                sx={{my: 2, color: 'white', display: 'block'}}
-            >
-                Join Quiz
-            </Button> */}
-
-                <Button
-                    component={Link}
-                    to={'/createIntro'}
-                    onClick={handleCloseNavMenu}
-                    sx={{my: 2, color: 'white', display: 'block'}}
-                >
-                    Create Quiz
-                </Button>
-
-                <Button
-                    component={Link}
-                    to={'/quizez'}
-                    onClick={handleCloseNavMenu}
-                    sx={{my: 2, color: 'white', display: 'block'}}
-                >
-                    All Quizzez
+                    {t("home")}
                 </Button>
 
                 <Button
@@ -56,7 +32,25 @@ const HeaderNavigation = () => {
                     onClick={handleCloseNavMenu}
                     sx={{my: 2, color: 'white', display: 'block'}}
                 >
-                    About
+                    {t("createQ")}
+                </Button>
+
+                <Button
+                    component={Link}
+                    to={'/quizez'}
+                    onClick={handleCloseNavMenu}
+                    sx={{my: 2, color: 'white', display: 'block'}}
+                >
+                    {t("allQuizez")}
+                </Button>
+
+                <Button
+                    component={Link}
+                    to={'/create'}
+                    onClick={handleCloseNavMenu}
+                    sx={{my: 2, color: 'white', display: 'block'}}
+                >
+                    {t("about")}
                 </Button>
 
                 <Button
@@ -65,10 +59,13 @@ const HeaderNavigation = () => {
                     onClick={handleCloseNavMenu}
                     sx={{my: 2, color: 'white', display: 'block'}}
                 >
-                    Login
+                    {t("login")}
                 </Button>
             </Box>
+
         </>
+            )}
+        </Translation>
     );
 }
 export default HeaderNavigation

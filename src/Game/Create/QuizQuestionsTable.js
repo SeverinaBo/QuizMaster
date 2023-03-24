@@ -15,7 +15,7 @@ import {reduxActions} from "../../reactReduxActions/reduxActions";
 import {styled} from "@mui/material/styles";
 import CreateQuizForm from "./CreateQuizForm";
 import {useDispatch} from "react-redux";
-import CreateQuizIntroPage from "./CreateQuizIntroPage";
+import { Translation } from "react-i18next";
 
 
 
@@ -120,17 +120,19 @@ const QuizQuestionsTable = () => {
         ));
 
         return (
-            <>
+            <Translation>
+                {(t, { i18n }) => (
+                    <>
                 <Table size="small">
                     <TableHead>
                         <TableRow>
-                            <TableCell>Question</TableCell>
-                            <TableCell>Answer A</TableCell>
-                            <TableCell>Answer B</TableCell>
-                            <TableCell>Answer C</TableCell>
-                            <TableCell>Answer D</TableCell>
-                            <TableCell>Correct Answer</TableCell>
-                            <TableCell>Edit/Remove</TableCell>
+                            <TableCell>{t("question")}</TableCell>
+                            <TableCell>{t("optionA")}</TableCell>
+                            <TableCell>{t("optionB")}</TableCell>
+                            <TableCell>{t("optionC")}</TableCell>
+                            <TableCell>{t("optionD")}</TableCell>
+                            <TableCell>{t("correctAnswr")}</TableCell>
+                            <TableCell>{t("editOrRemove")}</TableCell>
                             <TableCell></TableCell>
                         </TableRow>
                     </TableHead>
@@ -153,7 +155,7 @@ const QuizQuestionsTable = () => {
                             setEditQuestion(null);
                         }}
                     >
-                        Add new question
+                        {t("addNewQuestion")}
                     </Button>
                 </div>
 
@@ -173,8 +175,9 @@ const QuizQuestionsTable = () => {
                     Finish Quiz
                 </Button>
             </>
-
+                )}
+            </Translation>
         )
     }
 
-export default QuizQuestionsTable
+export default QuizQuestionsTable;

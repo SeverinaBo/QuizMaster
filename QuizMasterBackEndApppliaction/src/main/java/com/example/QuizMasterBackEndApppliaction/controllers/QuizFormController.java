@@ -6,6 +6,8 @@ import com.example.QuizMasterBackEndApppliaction.services.QuizFormService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -21,7 +23,7 @@ private final QuizFormService quizService;
     }
 
     @PostMapping
-    public String createQuizForm(@RequestBody QuizFormDto quizForm){
+    public String createQuizForm(@RequestBody @Valid QuizFormDto quizForm){
         return quizService.createQuizForm(quizForm);
     }
 
@@ -29,7 +31,5 @@ private final QuizFormService quizService;
     public String createQuizIntro(@RequestBody QuizFormDto quizForm){
         return quizService.createQuizForm(quizForm);
     }
-
-
 
 }

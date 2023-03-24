@@ -2,8 +2,8 @@ import {
     Alert,
     Button, Dialog,
     DialogActions, DialogContent,
-    DialogTitle, InputLabel,
-    LinearProgress, MenuItem, Select,
+    DialogTitle,
+    LinearProgress,
     Snackbar,
     TextField
 } from "@mui/material";
@@ -21,12 +21,20 @@ const quizFormValidationSchema = Yup.object().shape({
         .required()
         .label("Question"),
     optionA: Yup.string()
+        .min(1)
+        .max(255)
         .required(),
     optionB: Yup.string()
+        .min(1)
+        .max(255)
         .required(),
     optionC: Yup.string()
+        .min(1)
+        .max(255)
         .required(),
     optionD: Yup.string()
+        .min(1)
+        .max(255)
         .required()
  /*   correctAnswer: Yup.string()
         .required()*/
@@ -144,7 +152,6 @@ const CreateQuizForm = ({fetchQuestions, open, onClose, quizForm}) => {
                                             <Button onClick={onClose}>Cancel</Button>
                                             <Button disabled={props.isSubmitting} onClick={props.submitForm}>Add</Button>
                                         </DialogActions>
-
                                     </>
                                 )
                             }}

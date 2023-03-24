@@ -1,16 +1,17 @@
 import React from 'react';
 import ReactDOM from "react-dom/client";
-import {i18n} from "./i18nconfig";
+
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import reportWebVitals from "./reportWebVitals";
+import { i18n } from "./i18nConfig";
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-   /* <React.StrictMode> */
+    <React.StrictMode>
         <App />
- /*   </React.StrictMode> */
+    </React.StrictMode>
 );
 
 reportWebVitals();
