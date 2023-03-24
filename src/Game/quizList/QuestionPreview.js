@@ -16,7 +16,7 @@ import { styled } from '@mui/material/styles';
 import QuizList from "./QuizList";
 
 import {Link, useNavigate} from "react-router-dom";
-import {quizListElements} from "../Create/QuizQuestionsTable";
+/* import {quizListElements} from "../Create/QuizQuestionsTable"; */
 import {useQuiz} from "../../api/quizApi";
 import {useSelector} from "react-redux";
 import * as React from "react";
