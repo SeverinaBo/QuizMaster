@@ -30,4 +30,4 @@ const useCreateQuizForm = (config) => {
     return mutation.mutateAsync;
 };
 
-export {useQuiz, useCreateQuizForm }
+export {getQuizez, useQuiz, useCreateQuizForm }

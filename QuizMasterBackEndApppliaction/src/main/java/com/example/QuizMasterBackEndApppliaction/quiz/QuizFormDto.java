@@ -21,6 +21,6 @@ public class QuizFormDto {
    private String optionC;
     private String optionD;
 
- /*   private String correctAnswer;*/
+    private String correctAnswer;
 
 }

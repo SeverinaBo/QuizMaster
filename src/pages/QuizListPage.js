@@ -2,13 +2,16 @@
 // @mui
 import {Container, Stack, Typography} from '@mui/material';
 
+/*
+import {add_ic_3D as addIcon} from '../../public/assets/icons/add_ic_3D.svg';
+*/
 
 import QuizList from "../Game/quizList/QuizList";
 import quizzez from "../_mock/quizzez";
 
 
 // ----------------------------------------------------------------------
-
+/*const addIcon = [{icon: '/assets/icons/add_ic_3D.svg'}];*/
 
 
 export default function QuizListPage() {

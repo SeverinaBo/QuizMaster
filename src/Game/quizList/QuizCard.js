@@ -52,7 +52,7 @@ export default function QuizCard({ quiz }) {
 
     const quizez = useSelector((state) => state.quizez);
 
-
+//what is needed gameId
 
 
     return (

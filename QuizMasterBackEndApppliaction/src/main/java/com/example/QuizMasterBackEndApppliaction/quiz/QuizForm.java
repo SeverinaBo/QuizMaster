@@ -35,8 +35,8 @@ public class QuizForm {
     @Column(name = "OPTIOND", nullable = false)
     private String optionD;
 
-/*    @Column(name = "CORRECTANSWER", nullable = false)
-    private String correctAnswer;*/
+    @Column(name = "CORRECTANSWER", nullable = false)
+    private String correctAnswer;
 
 
 

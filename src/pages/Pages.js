@@ -7,14 +7,15 @@ import RegisterPage from "./RegisterPage";
 import Page404 from "./Page404";
 import React from "react";
 import QuizWithId from "./QuizWithId";
-import PlayingQuizForm from "../Game/Playing/PlayingQuizForm";
+
+import PlayingQuizForm2 from "../Game/Playing/PlayingQuizForm2";
 
 
 
 const Pages = () => (
     <Routes>
             <Route path='/' element={ <MainAppPage/> }/>
-        <Route path='/play' element={ <PlayingQuizForm/> }/>
+        <Route path='/play' element={ <PlayingQuizForm2/> }/>
             <Route path='/quizez' element={ <QuizListPage/> }/>
             <Route path='/quizez/:id' element={ <QuizWithId/> }/>
             <Route path='/login' element={ <LoginPage/> }/>

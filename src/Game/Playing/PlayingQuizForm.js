@@ -42,7 +42,7 @@ const PlayingQuizForm = (props) => {
         }));
     }, []);
 
-    useEffect(() => {
+/*    useEffect(() => {
         const { questions, currentQuestionIndex } = state;
         const currentQuestion = questions[currentQuestionIndex];
         const nextQuestion = questions[currentQuestionIndex + 1];
@@ -60,7 +60,7 @@ const PlayingQuizForm = (props) => {
         showOptions();
         handleDisableButton();
         startTimer();
-    }, [state.questions, state.currentQuestionIndex]);
+    }, [state.questions, state.currentQuestionIndex]);*/
 
     useEffect(() => {
         if (state.time.minutes === 0 && state.time.seconds === 0) {
@@ -275,7 +275,6 @@ const PlayingQuizForm = (props) => {
 
                     return (
                         <StyledContent>
-
 
                             <Fragment>
                                 <audio ref={correctSound} src={correctNotification}></audio>
