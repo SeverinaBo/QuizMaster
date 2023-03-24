@@ -8,6 +8,8 @@ import {getQuizez, useQuiz} from "../../api/quizApi";
 import {Button, Typography} from "@mui/material";
 import palette from "../../theme/palette";
 import {shape} from "prop-types";
+import correctSound from '../../sounds/correctAnswerSound.mp3';
+import wrongSound from '../../sounds/wrongAnswerSound.mp3';
 
 
 export const ButtonStyle = styled('div')(({theme}) => ({
@@ -24,7 +26,7 @@ const PlayingQuizForm2 = () => {
     const [questions, setQuestions] = useState([]);
     const [selectedAnswer, setSelectedAnswer] = useState(null);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-    const [answerCheck, setAnswerCheck] = useState(null);
+    const [checkIfCorrect, setCheckIfCorrect] = useState(null);
 
     useEffect(() => {
         const fetchQuestion = async () => {
@@ -44,11 +46,13 @@ const PlayingQuizForm2 = () => {
         console.log(`selectedAnswer: ${selectedAnswer}`);
         console.log(`correctAnswer: ${correctAnswer}`);
         if (selectedAnswer === correctAnswer) {
-            const audio = new Audio('../../sounds/correctSound.mp3');
-            audio.play();
-            setAnswerCheck('Correct!');
+            const correctAnswerSound = new Audio(correctSound);
+            correctAnswerSound.play();
+            setCheckIfCorrect('Correct!');
         } else {
-            setAnswerCheck(`Incorrect. The correct answer is ${correctAnswer}.`);
+            const wrongAnswerSound = new Audio(wrongSound);
+            wrongAnswerSound.play();
+            setCheckIfCorrect(`Incorrect. The correct answer is ${correctAnswer}.`);
         }
     };
 
@@ -76,15 +80,15 @@ const PlayingQuizForm2 = () => {
                         <Button onClick={() => setSelectedAnswer(question.optionD)}>{question.optionD}</Button>
                         <Button onClick={checkAnswer}>Submit Answer</Button>
                     </ButtonStyle>
-                    {answerCheck && (
+                    {checkIfCorrect && (
                         <Typography
                             variant="body1"
                             sx={{
                                 marginTop: 2,
-                                color: answerCheck.startsWith('Correct') ? palette.success.main : palette.error.main,
+                                color: checkIfCorrect.startsWith('Correct') ? palette.success.main : palette.error.main,
                             }}
                         >
-                            {answerCheck}
+                            {checkIfCorrect}
                         </Typography>
                     )}
                 </div>
