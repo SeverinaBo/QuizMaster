@@ -3,6 +3,7 @@ import { createSlice, configureStore } from "@reduxjs/toolkit";
 const createState = (quizez) => {
     return { quizez: quizez };
 };
+
 const initialState = createState([]);
 
 const quizezSlice = createSlice({

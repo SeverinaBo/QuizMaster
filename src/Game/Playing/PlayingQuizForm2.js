@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import { alpha, styled } from "@mui/material/styles";
-import {getQuizez, useQuiz} from "../../api/quizApi";
+import { useQuiz} from "../../api/quizApi";
 import { Button, Typography } from "@mui/material";
 import palette from "../../theme/palette";
 import correctSound from '../../sounds/correctAnswerSound.mp3';
@@ -29,6 +29,7 @@ const PlayingQuizForm2 = () => {
     const [selectedAnswer, setSelectedAnswer] = useState(null);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [checkIfCorrect, setCheckIfCorrect] = useState(null);
+    const {getQuizez} = useQuiz();
 
     useEffect(() => {
         const fetchQuestion = async () => {

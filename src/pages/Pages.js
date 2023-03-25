@@ -9,6 +9,7 @@ import React from "react";
 import QuizWithId from "./QuizWithId";
 
 import PlayingQuizForm2 from "../Game/Playing/PlayingQuizForm2";
+import PlayingQuizForm from "../Game/Playing/PlayingQuizForm";
 
 
 
@@ -18,6 +19,7 @@ const Pages = () => (
             <Route path='/play' element={ <PlayingQuizForm2/> }/>
             <Route path='/quizez' element={ <QuizListPage/> }/>
             <Route path='/quizez/:id' element={ <QuizWithId/> }/>
+        <Route path='/questions' element={ <PlayingQuizForm/> }/>
             <Route path='/login' element={ <LoginPage/> }/>
             <Route path='/create' element={ <QuizQuestionsTable/> }/>
             <Route path='/register' element={ <RegisterPage/> }/>

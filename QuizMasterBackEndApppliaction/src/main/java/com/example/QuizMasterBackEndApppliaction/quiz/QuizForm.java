@@ -20,22 +20,22 @@ public class QuizForm {
     @Column(name = "ID")
     private Long id;
 
-    @Column(name = "QUESTION", nullable = false)
+    @Column(name = "QUESTION")
     private String question;
 
-    @Column(name = "OPTIONA", nullable = false)
+    @Column(name = "OPTIONA")
     private String optionA;
 
-    @Column(name = "OPTIONB", nullable = false)
+    @Column(name = "OPTIONB")
     private String optionB;
 
-    @Column(name = "OPTIONC", nullable = false)
+    @Column(name = "OPTIONC")
     private String optionC;
 
-    @Column(name = "OPTIOND", nullable = false)
+    @Column(name = "OPTIOND")
     private String optionD;
 
-    @Column(name = "CORRECTANSWER", nullable = false)
+    @Column(name = "CORRECTANSWER")
     private String correctAnswer;
 
 
