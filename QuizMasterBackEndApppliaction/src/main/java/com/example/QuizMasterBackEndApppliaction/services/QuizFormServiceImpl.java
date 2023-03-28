@@ -61,6 +61,11 @@ public class QuizFormServiceImpl implements QuizFormService {
                         .build())
                 .collect(Collectors.toList());
     }
+
+    public void deleteById(Long id){
+        quizFormRepo.deleteById(id);
+    }
+
 }
 
 

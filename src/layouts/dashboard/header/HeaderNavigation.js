@@ -3,6 +3,8 @@ import {Link} from "react-router-dom";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { Translation } from "react-i18next";
+import MenuIcon from "@mui/icons-material/Menu";
+import {IconButton} from "@mui/material";
 
 const HeaderNavigation = () => {
     const [setAnchorElNav] = React.useState(null);
@@ -46,7 +48,7 @@ const HeaderNavigation = () => {
 
                 <Button
                     component={Link}
-                    to={'/create'}
+                    to={'/about'}
                     onClick={handleCloseNavMenu}
                     sx={{my: 2, color: 'white', display: 'block'}}
                 >
@@ -62,6 +64,7 @@ const HeaderNavigation = () => {
                     {t("login")}
                 </Button>
             </Box>
+
 
         </>
             )}

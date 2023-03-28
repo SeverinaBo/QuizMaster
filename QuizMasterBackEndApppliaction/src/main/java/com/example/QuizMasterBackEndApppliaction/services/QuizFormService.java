@@ -14,5 +14,5 @@ public interface QuizFormService {
     String createQuizForm(QuizFormDto quizFormDto);
 
 
-
+    void deleteById(Long id);
 }

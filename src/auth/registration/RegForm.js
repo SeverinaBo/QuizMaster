@@ -1,12 +1,12 @@
-import {useState} from 'react';
-import {Link, useNavigate} from 'react-router-dom';
+import * as React from "react";
 // @mui
-import {Stack, IconButton, InputAdornment, TextField, Checkbox, Button, Typography} from '@mui/material';
-
+import {Stack, IconButton, InputAdornment, TextField, Button, Typography} from '@mui/material';
+import * as Yup from 'yup';
 
 import {Field, Form, Formik} from "formik";
-import * as React from "react";
-import * as Yup from 'yup';
+//hooks
+import {useState} from 'react';
+import { useNavigate} from 'react-router-dom';
 // components
 import Iconify from '../../components/iconify';
 
@@ -65,6 +65,7 @@ export default function RegForm() {
                                    label="Email"
                                    variant="outlined"
                                    fullWidth
+                                   style={{marginTop: '30px'}}
                                    error={!!errors.email && touched.email}
                                    helperText={touched.email && errors.email}
                                    as={TextField}
@@ -77,6 +78,7 @@ export default function RegForm() {
                                    variant="outlined"
                                    fullWidth
                                    as={TextField}
+                                   style={{marginTop: '30px'}}
                                    error={!!errors.password && touched.password}
                                    helperText={touched.password && errors.password}
                                    type={showPassword ? 'text' : 'password'}
@@ -93,12 +95,7 @@ export default function RegForm() {
                                    }}
                             />
                             </Typography>
-                    <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{my: 2}}>
-                        <Checkbox name="remember" label="Remember me"/>
-                        <Link variant="subtitle2" underline="hover">
-                            Forgot password?
-                        </Link>
-                    </Stack>
+
 
                 <Button fullWidth size="large" type="submit" variant="contained" onClick={handleClick}>
                     Register

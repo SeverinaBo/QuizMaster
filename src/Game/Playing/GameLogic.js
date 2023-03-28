@@ -1,47 +1,61 @@
 import { useEffect, useState } from "react";
-import Start from "./components/Start";
-import Timer from "./components/Timer";
-import Trivia from "./components/Trivia";
 
-function GameLogic() {
+import {useDispatch, useSelector} from "react-redux";
+import {Navigate} from "react-router-dom";
+import QuestionDisplay from "./QuestionDisplay";
+import Box from "@mui/material/Box";
+import {Button} from "@mui/material";
+import {MoveNextQuestion, MovePrevQuestion, PushAnswer} from "../actions/quizezActions";
 
-    const [timeOut, setTimeOut] = useState(false);
-    const [questionNumber, setQuestionNumber] = useState(1);
-    const [questionData, setQuestionData] = useState(null);
+export default  function GameLogic() {
+    const [check, setChecked] = useState(undefined)
 
-    useEffect(() => {
-        async function fetchData() {
-            const response = await fetch("/api/all");
-            const data = await response.json();
-            setQuestionData(data);
+    const result = useSelector(state => state.result.result);
+    const { queue, questionId } = useSelector(state => state.quizez);
+    const dispatch = useDispatch()
+
+
+    function onNext(){
+        if(questionId < queue.length){
+
+            dispatch(MoveNextQuestion());
+            if(result.length <= questionId){
+                dispatch(PushAnswer(check))
+            }
         }
-        fetchData();
-    }, []);
+
+        setChecked(undefined)
+    }
+
+    function onPrev(){
+        if(questionId > 0){
+
+            dispatch(MovePrevQuestion());
+        }
+    }
+
+
+    function onChecked(check){
+        setChecked(check)
+    }
+
+
+    if(result.length && result.length >= queue.length){
+        return <Navigate to={'/result'} replace={true}></Navigate>
+    }
 
     return (
 
                             <>
-                                <div className="top">
-                                    <div className="timer">
-                                        <Timer
-                                            setTimeOut={setTimeOut}
-                                            questionNumber={questionNumber}
-                                        />
-                                    </div>
-                                </div>
-                                <div className="bottom">
-                                    {questionData && (
-                                        <Trivia
-                                            data={questionData}
-                                            questionNumber={questionNumber}
-                                            setQuestionNumber={setQuestionNumber}
-                                            setTimeOut={setTimeOut}
-                                        />
-                                    )}
-                                </div>
+                                <QuestionDisplay onChecked={onChecked} />
+
+                                <Box>
+                                    { questionId > 0 ? <Button onClick={onPrev}>Prev</Button> : <div></div>}
+                                    <Button  onClick={onNext}>Next</Button>
+                                </Box>
                             </>
 
     );
 }
 
-export default GameLogic;
+

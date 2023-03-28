@@ -2,13 +2,13 @@
 import {styled} from '@mui/material/styles';
 import { Container, Typography} from '@mui/material';
 // hooks
+import useResponsive from '../hooks/useResponsive';
 
 // sections
 import {Link} from "react-router-dom";
+
 import {LoginForm} from '../auth/login';
 
-import useResponsive from '../hooks/useResponsive';
-// components
 
 // ----------------------------------------------------------------------
 
@@ -40,7 +40,7 @@ const StyledContent = styled('div')(({theme}) => ({
 
 // ----------------------------------------------------------------------
 
-export default function LoginPage() {
+export default function Login() {
 
 
     const mdUp = useResponsive('up', 'md');
@@ -49,10 +49,7 @@ export default function LoginPage() {
 
     return (
         <>
-
-
             <StyledRoot>
-
                 {mdUp && (
                     <StyledSection>
                         <Typography variant="h3" sx={{px: 5, mt: 10, mb: 5}}>
@@ -61,7 +58,6 @@ export default function LoginPage() {
                         <img src="/assets/illustrations/signIn_illustration.png" alt="login"/>
                     </StyledSection>
                 )}
-
                 <Container maxWidth="sm">
                     <StyledContent>
                         <Typography variant="h4" gutterBottom>
@@ -72,8 +68,6 @@ export default function LoginPage() {
                             Don’t have an account? {''}
                             <Link to={"/register"} variant="subtitle2">Register</Link>
                         </Typography>
-
-
                         <LoginForm/>
                     </StyledContent>
                 </Container>

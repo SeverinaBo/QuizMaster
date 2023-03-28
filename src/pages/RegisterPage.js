@@ -1,6 +1,6 @@
 // @mui
 import {styled} from '@mui/material/styles';
-import { Container, Typography} from '@mui/material';
+import {Container, Typography} from '@mui/material';
 // hooks
 
 import {Link} from "react-router-dom";
@@ -10,7 +10,6 @@ import RegForm from "../auth/registration/RegForm";
 
 
 // sections
-
 
 
 // ----------------------------------------------------------------------
@@ -46,17 +45,12 @@ const StyledContent = styled('div')(({theme}) => ({
 export default function RegisterPage() {
 
 
-
-
     const mdUp = useResponsive('up', 'md');
-
 
 
     return (
         <>
-                 <StyledRoot>
-
-
+            <StyledRoot>
                 {mdUp && (
                     <StyledSection>
                         <Typography variant="h3" sx={{px: 5, mt: 10, mb: 5}}>
@@ -74,10 +68,10 @@ export default function RegisterPage() {
 
                         <Typography variant="body2" sx={{mb: 5}}>
                             Already have an account? {''}
-                            <Link to={ "/login" } variant="subtitle2">Log In</Link>
+                            <Link to={"/login"} variant="subtitle2">Log In</Link>
                         </Typography>
 
-<RegForm/>
+                        <RegForm/>
                     </StyledContent>
                 </Container>
             </StyledRoot>

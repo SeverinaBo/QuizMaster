@@ -7,7 +7,7 @@ import ScrollToTop from "./components/scroll-to-top";
 import { QueryClient, QueryClientProvider } from "react-query";
 import {Provider} from "react-redux";
 import ResponsiveAppBar from "./layouts/dashboard/header/ResponsiveAppBar";
-import reduxStore from "./reactReduxActions/reduxActions";
+import reduxStore from "./reactReduxActions/quizTableActions";
 import {ReactQueryDevtools} from "react-query/devtools";
 
 

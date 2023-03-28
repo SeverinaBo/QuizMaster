@@ -2,8 +2,15 @@ import PropTypes from 'prop-types';
 // @mui
 import { styled } from '@mui/material/styles';
 import { Box, Stack, AppBar, Toolbar, IconButton } from '@mui/material';
+import { Menu } from '@mui/material';
+
 // utils
 import { bgBlur } from '../../../theme/styled/cssStyles';
+import HeaderNavigation from "./HeaderNavigation";
+import LanguagePopover from "./LanguagePopover";
+import AccountPopover from "./AccountPopover";
+import * as React from "react";
+import ResponsiveAppBar from "./ResponsiveAppBar";
 // components
 
 
@@ -43,7 +50,9 @@ Header.propTypes = {
 
 
 export default function Header({ onOpenNav }) {
-  return (
+    const [menuOpen, setMenuOpen] = useState(false);
+
+    return (
     <StyledRoot>
 
         <StyledToolbar>
@@ -66,7 +75,12 @@ export default function Header({ onOpenNav }) {
             sm: 1,
           }}
          />
-      </StyledToolbar>
+<ResponsiveAppBar/>
+            <HeaderNavigation/>
+            <LanguagePopover/>
+            <AccountPopover/>
+
+        </StyledToolbar>
     </StyledRoot>
   );
 }

@@ -1,5 +1,15 @@
 import * as React from "react";
-import {Button, LinearProgress, IconButton, Table, TableBody, TableCell, TableHead, TableRow} from "@mui/material";
+import {
+    Button,
+    LinearProgress,
+    IconButton,
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableRow,
+    CircularProgress
+} from "@mui/material";
 
 
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -7,9 +17,9 @@ import EditIcon from '@mui/icons-material/Edit';
 
 import { useState } from "react";
 import {useNavigate} from "react-router-dom";
-import {useQuiz} from "../../api/quizApi";
+import {useQuiz, useDelQuiz} from "../../api/quizApi";
 
-import {reduxActions} from "../../reactReduxActions/reduxActions";
+import {deleteQuestion} from "../../reactReduxActions/quizTableActions";
 import {styled} from "@mui/material/styles";
 import CreateQuizForm from "./CreateQuizForm";
 import {useDispatch} from "react-redux";
@@ -18,9 +28,8 @@ import { Translation } from "react-i18next";
 
 
 
+
 export const StyledContent = styled('div')(({theme}) => ({
-    margin: 'auto',
-    minHeight: '50vh',
     display: 'flex',
     position:'center',
     justifyContent: 'center',
@@ -28,24 +37,33 @@ export const StyledContent = styled('div')(({theme}) => ({
     padding: theme.spacing(12, 0),
 }));
 
+const StyledButtons = styled('div')(({theme}) => ({
+    height: "100vh",
+    width: '700px',
+    alignItems: "center",
+    margin: 'auto',
+    display: 'flex',
+    textAlign: "center",
+    flexDirection: 'column',
+    fontSize: "1rem",
+    fontWeight: "bold",
+}));
 const QuizQuestionsTable = () => {
 
-    const dispatch = useDispatch();
-    const addQuestion = (question) => {
-        dispatch(reduxActions.addQuestion(question));
-    };
-    const removeQuestion = (questionId) => {
-        dispatch(reduxActions.removeQuestion(questionId));
-    };
+    const navigate = useNavigate();
+    const deleteQuestion = useDelQuiz();
 
-
+    const [loading, setLoading] = useState(false);
     const [openQuestionModal, setOpenQuestionModal] = useState(false);
-
     const [editQuestion, setEditQuestion] = useState(null);
     const {isFetching, quizez = [], refetch} = useQuiz();
 
-    /* const [quizInfo, setQuizInfo] = useState(null);*/
+    const handleDeleteQuestion = async (id) => {
+        setLoading(true)
+        await deleteQuestion(id);
+        setLoading(false)
 
+    }
 
     const loadingElement = isFetching && (
         <TableRow>
@@ -72,38 +90,23 @@ const QuizQuestionsTable = () => {
             <TableCell>{questionList.optionD}</TableCell>
             <TableCell>{questionList.correctAnswer}</TableCell>
             <TableCell>
-                {/*         <IconButton
-                        onClick={() => {
+                         <IconButton onClick={() => {
                             setOpenQuestionModal(true);
                             setEditQuestion(questionList);
-                        }}
-                    >
+                        }}>
                         <EditIcon/>
-                    </IconButton>*/}
+                    </IconButton>
 
-                <IconButton
-                    onClick={() =>
-                        removeQuestion(questionList.id)
-                    }
-                >
+                {loading ? (
+                    <IconButton>
+                    <CircularProgress size={24} value={200} />
+                    </IconButton>
+                ) : (
+                <IconButton onClick={() => handleDeleteQuestion(questionList.id)}>
                     <DeleteIcon/>
                 </IconButton>
+                )}
 
-                <IconButton
-                    onClick={() =>
-                        addQuestion({
-                            id: questionList.id,
-                            question: questionList.question,
-                            optionA: questionList.optionA,
-                            optionB: questionList.optionB,
-                            optionC: questionList.optionC,
-                            optionD: questionList.optionD,
-                            correctAnswer: questionList.correctAnswer,
-                        })
-                    }
-                >
-                    <EditIcon />
-                </IconButton>
 
             </TableCell>
         </TableRow>
@@ -132,15 +135,18 @@ const QuizQuestionsTable = () => {
                     </Table>
 
 
-
                     <CreateQuizForm
                         fetchQuestions={refetch}
                         open={openQuestionModal}
                         onClose={() => setOpenQuestionModal(false)}
                         quizForm={editQuestion}/>
-                    <div style={{marginTop: "10px", textAlign: "center"}}>
+                   <StyledButtons>
                         <Button
+                            style={{ marginTop: "10px"
+                                , width: '250px'
+                            }}
                             variant="outlined"
+                            position="center"
                             onClick={() => {
                                 setOpenQuestionModal(true);
                                 setEditQuestion(null);
@@ -148,23 +154,18 @@ const QuizQuestionsTable = () => {
                         >
                             {t("qAddNewQuestion")}
                         </Button>
-                    </div>
 
                     <Button
-                        style={{
-                            fontSize: "1rem",
-                            textAlign: "center",
-                            fontWeight: "bold",
-                            margin: "1rem 0",
-                            maxWidth: '500px',
-                            maxHeight: '50px',
+                        style={{ marginTop: "20px"
+                            , width: '250px'
                         }}
                         variant="contained"
                         position="center"
-                        /*onClick={() => setQuizInfo(reduxActions.getQuestions())}*/
+                        onClick={() => {navigate('/intro', {replace: true})}}
                     >
-                        Finish Quiz
+                        Finish and play
                     </Button>
+                </StyledButtons>
                 </>
             )}
         </Translation>

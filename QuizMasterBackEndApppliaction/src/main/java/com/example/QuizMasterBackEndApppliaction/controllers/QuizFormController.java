@@ -1,5 +1,6 @@
 package com.example.QuizMasterBackEndApppliaction.controllers;
 
+import com.example.QuizMasterBackEndApppliaction.quiz.QuizForm;
 import com.example.QuizMasterBackEndApppliaction.quiz.QuizFormDto;
 import com.example.QuizMasterBackEndApppliaction.services.QuizFormService;
 
@@ -17,19 +18,18 @@ import java.util.List;
 public class QuizFormController {
 private final QuizFormService quizService;
 
-    @GetMapping("/all")
+    @GetMapping("/questions")
     public List<QuizFormDto> getAllQuestions(){
         return  quizService.getAllQuestions();
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public String createQuizForm(@RequestBody @Valid QuizFormDto quizForm){
         return quizService.createQuizForm(quizForm);
     }
 
-    @PostMapping("/intro")
-    public String createQuizIntro(@RequestBody QuizFormDto quizForm){
-        return quizService.createQuizForm(quizForm);
+    @DeleteMapping("/question/{id}")
+    public void deleteById(@PathVariable Long id){
+        quizService.deleteById(id);
     }
-
 }

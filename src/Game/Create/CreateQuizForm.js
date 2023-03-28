@@ -14,7 +14,6 @@ import {useCreateQuizForm} from "../../api/quizApi";
 import {StyledContent} from "./QuizQuestionsTable";
 
 
-
 const quizFormValidationSchema = Yup.object().shape({
     quizQuestion: Yup.string()
         .min(5)
@@ -35,8 +34,8 @@ const quizFormValidationSchema = Yup.object().shape({
         .min(1)
         .max(255)
         .required(),
-       correctAnswer: Yup.string()
-           .required()
+    correctAnswer: Yup.string()
+        .required()
 })
 
 const CreateQuizForm = ({fetchQuestions, open, onClose, quizForm}) => {
@@ -89,6 +88,7 @@ const CreateQuizForm = ({fetchQuestions, open, onClose, quizForm}) => {
                                                    name="quizQuestion"
                                                    variant="standard"
                                                    fullWidth
+                                                   style={{marginTop: '10px'}}
                                                    error={!!props.errors.quizQuestion && props.touched.quizQuestion}
                                                    helperText={props.touched.quizQuestion && props.errors["quizQuestion"]}
                                                    as={TextField}
@@ -97,6 +97,7 @@ const CreateQuizForm = ({fetchQuestions, open, onClose, quizForm}) => {
                                                    name="optionA"
                                                    variant="standard"
                                                    fullWidth
+                                                   style={{marginTop: '10px'}}
                                                    error={!!props.errors.optionA && props.touched.optionA}
                                                    helperText={props.touched.optionA && props.errors["optionA"]}
                                                    as={TextField}
@@ -106,6 +107,7 @@ const CreateQuizForm = ({fetchQuestions, open, onClose, quizForm}) => {
                                                    name="optionB"
                                                    variant="standard"
                                                    fullWidth
+                                                   style={{marginTop: '10px'}}
                                                    error={!!props.errors.optionB && props.touched.optionB}
                                                    helperText={props.touched.optionB && props.errors["optionB"]}
                                                    as={TextField}
@@ -114,6 +116,7 @@ const CreateQuizForm = ({fetchQuestions, open, onClose, quizForm}) => {
                                                    name="optionC"
                                                    variant="standard"
                                                    fullWidth
+                                                   style={{marginTop: '10px'}}
                                                    error={!!props.errors.optionC && props.touched.optionC}
                                                    helperText={props.touched.optionC && props.errors["optionC"]}
                                                    as={TextField}
@@ -122,12 +125,14 @@ const CreateQuizForm = ({fetchQuestions, open, onClose, quizForm}) => {
                                                    name="optionD"
                                                    variant="standard"
                                                    fullWidth
+                                                   style={{marginTop: '10px'}}
                                                    error={!!props.errors.optionD && props.touched.optionD}
                                                    helperText={props.touched.optionD && props.errors["optionD"]}
                                                    as={TextField}
                                             />
 
-                                                    <InputLabel>Correct Answer</InputLabel>
+                                            <InputLabel style={{marginTop: '20px'}}
+                                            >Correct Answer</InputLabel>
                                             <Select
                                                 value={props.values.correctAnswer}
                                                 label="Correct Answer"
@@ -141,8 +146,9 @@ const CreateQuizForm = ({fetchQuestions, open, onClose, quizForm}) => {
                                                 <MenuItem value="d">D</MenuItem>
                                             </Select>
 
-
-                                            {props.isSubmitting && <LinearProgress color="inherit"/>}
+                                            <div style={{marginTop: '10px'}}>
+                                                {props.isSubmitting && <LinearProgress color="inherit"/>}
+                                            </div>
                                         </DialogContent>
                                         <DialogActions>
                                             <Button onClick={onClose}>Cancel</Button>
