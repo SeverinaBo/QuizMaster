@@ -8,6 +8,7 @@ import {useState} from 'react';
 import { useNavigate} from 'react-router-dom';
 // components
 import Iconify from '../../components/iconify';
+import {Translation} from "react-i18next";
 
 // ----------------------------------------------------------------------
 
@@ -38,7 +39,7 @@ export default function LoginForm() {
                         password: '',
                     }}
                     onSubmit={(values) => {
-                        console.log(values)
+
                     }}
                     validationSchema={signupValidationSchema}>
                     {({errors, touched}) => (
@@ -77,12 +78,14 @@ export default function LoginForm() {
                                        ),
                                    }}
                             />
-
+                            <Translation>
+                                {(t, {i18n}) => (
 
                 <Button style={{marginTop: '30px'}} fullWidth size="large" type="submit" variant="contained" onClick={handleClick}>
-                    Login
+                    {t("login")}
                 </Button>
-
+                                )}
+                            </Translation>
                 </Form>
                 )}
             </Formik>

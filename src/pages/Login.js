@@ -6,7 +6,7 @@ import useResponsive from '../hooks/useResponsive';
 
 // sections
 import {Link} from "react-router-dom";
-
+import {Translation} from "react-i18next";
 import {LoginForm} from '../auth/login';
 
 
@@ -49,11 +49,13 @@ export default function Login() {
 
     return (
         <>
+            <Translation>
+                {(t, {i18n}) => (
             <StyledRoot>
                 {mdUp && (
                     <StyledSection>
                         <Typography variant="h3" sx={{px: 5, mt: 10, mb: 5}}>
-                            Welcome to Quizmasters
+                            {t("welcome")}
                         </Typography>
                         <img src="/assets/illustrations/signIn_illustration.png" alt="login"/>
                     </StyledSection>
@@ -61,17 +63,19 @@ export default function Login() {
                 <Container maxWidth="sm">
                     <StyledContent>
                         <Typography variant="h4" gutterBottom>
-                            Sign in to your account
+                            {t("signInToAcc")}
                         </Typography>
 
                         <Typography variant="body2" sx={{mb: 5}}>
-                            Don’t have an account? {''}
-                            <Link to={"/register"} variant="subtitle2">Register</Link>
+                            {t("noAccount")} {''}
+                            <Link to={"/register"} variant="subtitle2">{t("register")}</Link>
                         </Typography>
                         <LoginForm/>
                     </StyledContent>
                 </Container>
             </StyledRoot>
+                )}
+            </Translation>
         </>
     );
 }
