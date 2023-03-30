@@ -44,9 +44,8 @@ function QuestionGame() {
     const [showResults, setShowResults] = useState(false);
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [score, setScore] = useState(0);
-
-
     const [music, setMusic] = useState(null);
+
     useEffect(() => {
         const newMusic = new Audio(gameSound);
         newMusic.loop = true;
@@ -151,7 +150,7 @@ function QuestionGame() {
                             {score} out of {questions.length} correct - (
                             {(score / questions.length) * 100}%)
                         </Typography>
-                        <Button onClick={() => restartGame()}>Restart game</Button>
+                        <Button onClick={() => restartGame()} variant="contained">Restart game</Button>
                     </>
                 ) : (
                     <>
