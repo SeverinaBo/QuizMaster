@@ -2,8 +2,8 @@ import {
     Alert,
     Button, Dialog,
     DialogActions, DialogContent,
-    DialogTitle, InputLabel,
-    LinearProgress, MenuItem, Select,
+    DialogTitle,
+    LinearProgress, MenuItem,
     Snackbar,
     TextField
 } from "@mui/material";
@@ -18,50 +18,54 @@ const quizFormValidationSchema = Yup.object().shape({
     quizQuestion: Yup.string()
         .min(5)
         .required(),
-    optionA: Yup.string()
+    option1: Yup.string()
         .min(1)
         .max(255)
         .required(),
-    optionB: Yup.string()
+    option2: Yup.string()
         .min(1)
         .max(255)
         .required(),
-    optionC: Yup.string()
+    option3: Yup.string()
         .min(1)
         .max(255)
         .required(),
-    optionD: Yup.string()
+    option4: Yup.string()
         .min(1)
         .max(255)
         .required(),
-    correctAnswer: Yup.string()
+    correctAnswer: Yup.number()
+        .min(1, ({label, min}) => `${label} must be between 1 and 4`)
+        .max(4)
+        .label("Correct answer")
         .required()
 })
 
 const CreateQuizForm = ({fetchQuestions, open, onClose, quizForm}) => {
 
         const [alertOpen, setAlertOpen] = React.useState(false);
-        const [correctAnswer, setCorrectAnswer] = React.useState('');
+
         const createQuizForm = useCreateQuizForm();
 
 
         const initialValues = quizForm ? {
-            id: quizForm.id,
+            questionId: quizForm.questionId,
             quizQuestion: quizForm.question,
-            optionA: quizForm.optionA,
-            optionB: quizForm.optionB,
-            optionC: quizForm.optionC,
-            optionD: quizForm.optionD,
-            correctAnswer: correctAnswer
+            option1: quizForm.option1,
+            option2: quizForm.option2,
+            option3: quizForm.option3,
+            option4: quizForm.option4,
+            correctAnswer: quizForm.correctAnswer
         } : {
-            id: null,
+            questionId: null,
             quizQuestion: '',
-            optionA: '',
-            optionB: '',
-            optionC: '',
-            optionD: '',
-            correctAnswer: ''
+            option1: '',
+            option2: '',
+            option3: '',
+            option4: '',
+            correctAnswer: '',
         }
+
         const title = quizForm ? "Edit question" : "Add new question";
 
         return (
@@ -87,64 +91,72 @@ const CreateQuizForm = ({fetchQuestions, open, onClose, quizForm}) => {
                                             <Field label="Question"
                                                    name="quizQuestion"
                                                    variant="standard"
+                                                   value={props.question}
                                                    fullWidth
                                                    style={{marginTop: '10px'}}
                                                    error={!!props.errors.quizQuestion && props.touched.quizQuestion}
                                                    helperText={props.touched.quizQuestion && props.errors["quizQuestion"]}
                                                    as={TextField}
                                             />
-                                            <Field label="Option A"
-                                                   name="optionA"
+                                            <Field label="Option 1"
+                                                   name="option1"
                                                    variant="standard"
                                                    fullWidth
                                                    style={{marginTop: '10px'}}
-                                                   error={!!props.errors.optionA && props.touched.optionA}
-                                                   helperText={props.touched.optionA && props.errors["optionA"]}
+                                                   error={!!props.errors.option1 && props.touched.option1}
+                                                   helperText={props.touched.option1 && props.errors["option1"]}
                                                    as={TextField}
                                             />
 
-                                            <Field label="Option B"
-                                                   name="optionB"
+                                            <Field label="Option 2"
+                                                   name="option2"
                                                    variant="standard"
                                                    fullWidth
                                                    style={{marginTop: '10px'}}
-                                                   error={!!props.errors.optionB && props.touched.optionB}
-                                                   helperText={props.touched.optionB && props.errors["optionB"]}
+                                                   error={!!props.errors.option2 && props.touched.option2}
+                                                   helperText={props.touched.option2 && props.errors["option2"]}
                                                    as={TextField}
                                             />
-                                            <Field label="Option C"
-                                                   name="optionC"
+                                            <Field label="Option 3"
+                                                   name="option3"
                                                    variant="standard"
                                                    fullWidth
                                                    style={{marginTop: '10px'}}
-                                                   error={!!props.errors.optionC && props.touched.optionC}
-                                                   helperText={props.touched.optionC && props.errors["optionC"]}
+                                                   error={!!props.errors.option3 && props.touched.option3}
+                                                   helperText={props.touched.option3 && props.errors["option3"]}
                                                    as={TextField}
                                             />
-                                            <Field label="Option D"
-                                                   name="optionD"
+                                            <Field label="Option 4"
+                                                   name="option4"
                                                    variant="standard"
                                                    fullWidth
                                                    style={{marginTop: '10px'}}
-                                                   error={!!props.errors.optionD && props.touched.optionD}
-                                                   helperText={props.touched.optionD && props.errors["optionD"]}
+                                                   error={!!props.errors.option4 && props.touched.option4}
+                                                   helperText={props.touched.option4 && props.errors["option4"]}
                                                    as={TextField}
                                             />
 
-                                            <InputLabel style={{marginTop: '20px'}}
-                                            >Correct Answer</InputLabel>
-                                            <Select
-                                                value={props.values.correctAnswer}
-                                                label="Correct Answer"
-                                                name="correctAnswer"
-                                                fullWidth
-                                                onChange={props.handleChange}
+
+                                            <Field label="Correct Answer"
+                                                   name="correctAnswer"
+                                                   variant="standard"
+                                                   fullWidth
+                                                   style={{marginTop: '10px'}}
+                                                   error={!!props.errors.correctAnswer && props.touched.correctAnswer}
+                                                   helperText={props.touched.correctAnswer && props.errors["correctAnswer"]}
+                                                   as={TextField}
+                                                   select
+                                                   onChange={(event) => {
+                                                       const { value } = event.target;
+                                                       props.setFieldValue('correctAnswer', parseInt(value, 10));
+                                                   }}
                                             >
-                                                <MenuItem value="a">A</MenuItem>
-                                                <MenuItem value="b">B</MenuItem>
-                                                <MenuItem value="c">C</MenuItem>
-                                                <MenuItem value="d">D</MenuItem>
-                                            </Select>
+                                                <MenuItem value="1">1</MenuItem>
+                                                <MenuItem value="2">2</MenuItem>
+                                                <MenuItem value="3">3</MenuItem>
+                                                <MenuItem value="4">4</MenuItem>
+                                            </Field>
+
 
                                             <div style={{marginTop: '10px'}}>
                                                 {props.isSubmitting && <LinearProgress color="inherit"/>}

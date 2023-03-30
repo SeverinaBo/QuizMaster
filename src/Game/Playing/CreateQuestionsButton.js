@@ -5,7 +5,7 @@ import {Translation} from "react-i18next";
 import {useNavigate} from "react-router-dom";
 
 
-function CreateOrPlay() {
+function CreateQuestionsButton() {
 
     const navigate = useNavigate();
 
@@ -22,13 +22,6 @@ function CreateOrPlay() {
                             {t("createQ")}
                         </Button>
 
-                        <Button style={{marginTop: '10px', marginBottom: '20px',width: '250px' }}  type="submit" variant="contained"
-                                onClick={() => {
-                                    navigate('/intro', {replace: true})
-                                }}>
-                            {t("playQ")}
-                        </Button>
-
                     </>
                 )}
             </Translation>
@@ -37,4 +30,4 @@ function CreateOrPlay() {
 }
 
 
-export default CreateOrPlay;
+export default CreateQuestionsButton;

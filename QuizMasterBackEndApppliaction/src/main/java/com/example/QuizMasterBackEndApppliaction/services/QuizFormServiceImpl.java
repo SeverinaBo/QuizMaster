@@ -31,18 +31,18 @@ public class QuizFormServiceImpl implements QuizFormService {
     public String createQuizForm(QuizFormDto quizFormDto) {
         QuizForm newQuestion = createNewQuestion(quizFormDto);
         quizFormRepo.save(newQuestion);
-        return newQuestion.getId() != null ? "success" : "failed";
+        return newQuestion.getQuestionId() != null ? "success" : "failed";
     }
 
 
     private QuizForm createNewQuestion(QuizFormDto quizFormDto) {
         return QuizForm.builder()
-                .id(quizFormDto.getId())
+                .questionId(quizFormDto.getQuestionId())
                 .question(quizFormDto.getQuestion())
-                .optionA(quizFormDto.getOptionA())
-                .optionB(quizFormDto.getOptionB())
-                .optionC(quizFormDto.getOptionC())
-                .optionD(quizFormDto.getOptionD())
+                .option1(quizFormDto.getOption1())
+                .option2(quizFormDto.getOption2())
+                .option3(quizFormDto.getOption3())
+                .option4(quizFormDto.getOption4())
                 .correctAnswer(quizFormDto.getCorrectAnswer())
                 .build();
     }
@@ -51,20 +51,18 @@ public class QuizFormServiceImpl implements QuizFormService {
     private List<QuizFormDto> mapToDto(Collection<QuizForm> entities) {
         return entities.stream()
                 .map(o -> QuizFormDto.builder()
-                        .id(o.getId())
+                        .questionId(o.getQuestionId())
                         .question(o.getQuestion())
-                        .optionA(o.getOptionA())
-                        .optionB(o.getOptionB())
-                        .optionC(o.getOptionC())
-                        .optionD(o.getOptionD())
+                        .option1(o.getOption1())
+                        .option2(o.getOption2())
+                        .option3(o.getOption3())
+                        .option4(o.getOption4())
                         .correctAnswer(o.getCorrectAnswer())
                         .build())
                 .collect(Collectors.toList());
     }
 
-    public void deleteById(Long id){
-        quizFormRepo.deleteById(id);
-    }
+
 
 }
 

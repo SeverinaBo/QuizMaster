@@ -28,8 +28,5 @@ private final QuizFormService quizService;
         return quizService.createQuizForm(quizForm);
     }
 
-    @DeleteMapping("/question/{id}")
-    public void deleteById(@PathVariable Long id){
-        quizService.deleteById(id);
-    }
+
 }

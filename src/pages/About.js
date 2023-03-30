@@ -4,19 +4,20 @@ import {styled} from "@mui/material/styles";
 import useResponsive from "../hooks/useResponsive";
 
 
-import { Typography} from "@mui/material";
+import {Typography} from "@mui/material";
 
-import { Translation } from "react-i18next";
-import CreateOrPlay from "../Game/CreateOrPlay";
+import {Translation} from "react-i18next";
+import PlayQuizButton from "../Game/Playing/PlayQuizButton";
+import CreateQuestionsButton from "../Game/Playing/CreateQuestionsButton";
 
 
 export const StyledSection = styled('div')(({theme}) => ({
     width: '100%',
     flex: 1,
-    alignItems:"center",
-    position:"center",
-    display:"flex",
-    flexDirection:"column",
+    alignItems: "center",
+    position: "center",
+    display: "flex",
+    flexDirection: "column",
     maxWidth: 500,
     margin: ' auto',
     minHeight: '50vh',
@@ -31,38 +32,40 @@ export const StyledSection = styled('div')(({theme}) => ({
 function About() {
 
 
-
     const mdUp = useResponsive('up', 'md');
 
     return (
 
-            <>
+        <>
+        <Translation>
+            {(t, {i18n}) => (
+            <StyledSection style={{marginTop: '40px'}}>
 
-                        <StyledSection style={{marginTop: '40px' }} >
-
-                            <Typography variant="h5" style={{marginTop: '20px' }}
-                                        alignItems="center"
-                                        position="center">
-                                What is QuizMasters?</Typography>
-
-                            <Typography variant="h7" style={{marginBottom: '20px' }} >
-                                <br/>A game where you can create your own quizez in any topic. Questions and answer options are yours to choose. <br/>
-                                Try it alone or with friends. <br/>
-                                Create, play, answer and compare the results.
-                            </Typography>
+                <Typography variant="h5" style={{marginTop: '20px'}}
+                            alignItems="center"
+                            position="center">
+                    {t("whatIsQM")}</Typography>
 
 
-                            {mdUp && (
-                                <div style={{margin: '40px'  }}>
+                        <Typography variant="h7" style={{marginBottom: '20px'}}>
 
-                                    <img src="/assets/images/pageImages/about_page_image.svg" alt="about"/>
-                                </div>
-                            )}
+                            {t("aboutPage")}
 
-                            <CreateOrPlay/>
-                        </StyledSection>
+                        </Typography>
 
-                </>
+                {mdUp && (
+                    <div style={{margin: '40px'}}>
+                        <img src="/assets/images/pageImages/about_page_image.svg" alt="about"/>
+                    </div>
+                )}
+
+                <CreateQuestionsButton/>
+                <PlayQuizButton/>
+            </StyledSection>
+            )}
+        </Translation>
+
+        </>
 
 
     )

@@ -19,8 +19,6 @@ const quizezSlice = createSlice({
 });
 
 
-
-
     const reduxStore = configureStore({
             reducer: quizezSlice.reducer,
         });

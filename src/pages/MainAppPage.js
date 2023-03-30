@@ -7,7 +7,8 @@ import useResponsive from "../hooks/useResponsive";
 import {useNavigate} from "react-router-dom";
 import {Translation} from "react-i18next";
 
-import CreateOrPlay from "../Game/CreateOrPlay";
+import PlayQuizButton from "../Game/Playing/PlayQuizButton";
+import CreateQuestionsButton from "../Game/Playing/CreateQuestionsButton";
 
 
 export const StyledSection = styled('div')(({theme}) => ({
@@ -67,7 +68,8 @@ function MainAppPage() {
                                     {t("about")}
                                 </Button>
 
-                                <CreateOrPlay/>
+                                <CreateQuestionsButton/>
+                                <PlayQuizButton/>
                             </StyledButtons>
                         </StyledSection>
                     )}

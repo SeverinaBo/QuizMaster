@@ -17,26 +17,26 @@ public class QuizForm {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
-    private Long id;
+    @Column(name = "QUESTION_ID")
+    private Long questionId;
 
     @Column(name = "QUESTION")
     private String question;
 
-    @Column(name = "OPTIONA")
-    private String optionA;
+    @Column(name = "OPTION1")
+    private String option1;
 
-    @Column(name = "OPTIONB")
-    private String optionB;
+    @Column(name = "OPTION2")
+    private String option2;
 
-    @Column(name = "OPTIONC")
-    private String optionC;
+    @Column(name = "OPTION3")
+    private String option3;
 
-    @Column(name = "OPTIOND")
-    private String optionD;
+    @Column(name = "OPTION4")
+    private String option4;
 
     @Column(name = "CORRECTANSWER")
-    private String correctAnswer;
+    private int correctAnswer;
 
 
 

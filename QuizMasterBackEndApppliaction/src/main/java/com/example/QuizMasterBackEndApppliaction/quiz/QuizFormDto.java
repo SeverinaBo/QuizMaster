@@ -13,14 +13,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class QuizFormDto {
 
-    private Long id;
+    private Long questionId;
     private String question;
-    private String optionA;
-    private String optionB;
+    private String option1;
+    private String option2;
 
-   private String optionC;
-    private String optionD;
+    private String option3;
+    private String option4;
 
-    private String correctAnswer;
+    private int correctAnswer;
 
 }
